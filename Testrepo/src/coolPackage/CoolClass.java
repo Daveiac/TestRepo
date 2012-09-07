@@ -11,6 +11,15 @@ public class CoolClass {
 		coolMethod();
 	}
 
+	private void unCoolMethod() {
+		long x = 0;
+		while(true) {
+			if (x != 41) {
+				System.out.print(++x);
+			}
+		}
+	}
+	
 	private void coolMethod() {
 		System.out.println(coolString);
 		System.out.println("This method is the coolest");
