@@ -21,6 +21,7 @@ public class DisplayImage {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(300, 300);
 		frame.setLayout(new FlowLayout());
+		frame.setLocationRelativeTo(null);
 		
 		BufferedImage img = ImageManager.newImage("res/Spritesheet.png");
 		ArrayList<JLabel> imgList = new ArrayList<JLabel>();
