@@ -23,11 +23,10 @@ public class DisplayImage {
 		frame.setSize(300, 300);
 		frame.setLayout(new FlowLayout());
 		
-		ImageManager im = new ImageManager();
-		BufferedImage coinImg = im.newImage("res/Spritesheet.png");
-		BufferedImage bar1 = im.getAnimationFrame(coinImg, 0, 0, 240, 34);
-		BufferedImage bar2 = im.getAnimationFrame(coinImg, 1, 0, 240, 34);
-		BufferedImage bar3 = im.getAnimationFrame(coinImg, 2, 0, 240, 34);
+		BufferedImage coinImg = ImageManager.newImage("res/Spritesheet.png");
+		BufferedImage bar1 = ImageManager.getAnimationFrame(coinImg, 0, 0, 240, 34);
+		BufferedImage bar2 = ImageManager.getAnimationFrame(coinImg, 1, 0, 240, 34);
+		BufferedImage bar3 = ImageManager.getAnimationFrame(coinImg, 2, 0, 240, 34);
 		
 		
 		JLabel coin = new JLabel(new ImageIcon(bar1));
