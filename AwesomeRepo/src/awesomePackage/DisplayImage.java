@@ -1,13 +1,11 @@
 package awesomePackage;
 
 import java.awt.FlowLayout;
-import java.awt.LayoutManager;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.LayoutStyle;
 
 public class DisplayImage {
 	
@@ -22,16 +20,14 @@ public class DisplayImage {
 	private void run() {
 		frame = new JFrame("AWESOMEFRAME!");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(100, 100);
+		frame.setSize(300, 300);
 		frame.setLayout(new FlowLayout());
 		
 		ImageManager im = new ImageManager();
 		BufferedImage coinImg = im.newImage("res/Spritesheet.png");
-		int w = coinImg.getWidth();
-		int h = coinImg.getHeight();
-		BufferedImage bar1 = im.crop(coinImg, 0, 0, w/3, h);
-		BufferedImage bar2 = im.crop(coinImg, w/3, 0, w/3, h);
-		BufferedImage bar3 = im.crop(coinImg, 2*(w/3), 0, w/3, h);
+		BufferedImage bar1 = im.getAnimationFrame(coinImg, 0, 0, 240, 34);
+		BufferedImage bar2 = im.getAnimationFrame(coinImg, 1, 0, 240, 34);
+		BufferedImage bar3 = im.getAnimationFrame(coinImg, 2, 0, 240, 34);
 		
 		
 		JLabel coin = new JLabel(new ImageIcon(bar1));
@@ -42,6 +38,7 @@ public class DisplayImage {
 		frame.add(coin2);
 		frame.add(coin3);
 		frame.setVisible(true);
+//		frame.pack();
 	}
 
 }
