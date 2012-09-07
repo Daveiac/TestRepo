@@ -26,10 +26,10 @@ public class DisplayImage {
 		frame.setLayout(new FlowLayout());
 		
 		BufferedImage img = ImageManager.newImage("res/Spritesheet.png");
-		ArrayList<Icon> imgList = new ArrayList<Icon>();
+		ArrayList<JLabel> imgList = new ArrayList<JLabel>();
 		for (int i = 0; i < 3; i++) {
-			imgList.add(new ImageIcon(ImageManager.getAnimationFrame(img, i, 0, 240, 34)));
-			frame.add(new JLabel(imgList.get(i)));
+			imgList.add(new JLabel(new ImageIcon(ImageManager.getAnimationFrame(img, i, 0, 240, 34))));
+			frame.add(imgList.get(i));
 		}
 		frame.setVisible(true);
 	}
