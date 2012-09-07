@@ -4,6 +4,6 @@ public class NyKlasse {
 		System.out.println("Klassen er ny.");
 		
 	}
-	//Denne klassen er ny
 
+	
 }
