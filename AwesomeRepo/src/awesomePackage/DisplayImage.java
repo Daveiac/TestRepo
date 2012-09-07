@@ -2,7 +2,9 @@ package awesomePackage;
 
 import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,22 +25,13 @@ public class DisplayImage {
 		frame.setSize(300, 300);
 		frame.setLayout(new FlowLayout());
 		
-		ImageManager im = new ImageManager();
-		BufferedImage coinImg = im.newImage("res/Spritesheet.png");
-		BufferedImage bar1 = im.getAnimationFrame(coinImg, 0, 0, 240, 34);
-		BufferedImage bar2 = im.getAnimationFrame(coinImg, 1, 0, 240, 34);
-		BufferedImage bar3 = im.getAnimationFrame(coinImg, 2, 0, 240, 34);
-		
-		
-		JLabel coin = new JLabel(new ImageIcon(bar1));
-		JLabel coin2 = new JLabel(new ImageIcon(bar2));
-		JLabel coin3 = new JLabel(new ImageIcon(bar3));
-		
-		frame.add(coin);
-		frame.add(coin2);
-		frame.add(coin3);
+		BufferedImage img = ImageManager.newImage("res/Spritesheet.png");
+		ArrayList<Icon> imgList = new ArrayList<Icon>();
+		for (int i = 0; i < 3; i++) {
+			imgList.add(new ImageIcon(ImageManager.getAnimationFrame(img, i, 0, 240, 34)));
+			frame.add(new JLabel(imgList.get(i)));
+		}
 		frame.setVisible(true);
-//		frame.pack();
 	}
 
 }
