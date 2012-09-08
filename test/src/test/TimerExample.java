@@ -8,9 +8,12 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 public class TimerExample {
+	
+	int windowWidth = 1024;
+	int windowHeight = 512;
 
 	/** position of quad */
-	float x = 400, y = 300;
+	float x = windowWidth/2, y = windowHeight/2;
 	/** angle of quad rotation */
 	float rotation = 0;
 
@@ -24,7 +27,7 @@ public class TimerExample {
 
 	public void start() {
 		try {
-			Display.setDisplayMode(new DisplayMode(800, 600));
+			Display.setDisplayMode(new DisplayMode(windowWidth, windowHeight));
 			Display.create();
 		} catch (LWJGLException e) {
 			e.printStackTrace();
@@ -70,12 +73,12 @@ public class TimerExample {
 		// keep quad on the screen
 		if (x < 0)
 			x = 0;
-		if (x > 800)
-			x = 800;
+		if (x > windowWidth)
+			x = windowWidth;
 		if (y < 0)
 			y = 0;
-		if (y > 600)
-			y = 600;
+		if (y > windowHeight)
+			y = windowHeight;
 
 		updateFPS(); // update FPS Counter
 	}
@@ -117,7 +120,7 @@ public class TimerExample {
 	public void initGL() {
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
-		GL11.glOrtho(0, 800, 0, 600, 1, -1);
+		GL11.glOrtho(0, windowWidth, 0, windowHeight, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 	}
 
