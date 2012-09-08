@@ -7,7 +7,7 @@
 	<classpathentry kind="lib" path="libs/jars/lwjgl_util.jar"/>
 	<classpathentry kind="lib" path="libs/jars/lwjgl.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="test/libs/natives-linux"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="test/libs/natives-win"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="libs/jars/slick-util.jar"/>
