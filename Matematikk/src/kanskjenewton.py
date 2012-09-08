@@ -9,5 +9,4 @@ y = 9
 
 for x in range(1,10):
     print round(y,6)
-    tall = y - f(y)/d(y)
-    y = tall
+    y = y - f(y)/d(y)
