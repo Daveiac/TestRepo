@@ -9,8 +9,8 @@ import org.lwjgl.opengl.GL11;
 
 public class TimerExample {
 	
-	int windowWidth = 1024;
-	int windowHeight = 512;
+	int windowWidth = 800;
+	int windowHeight = 600;
 
 	/** position of quad */
 	float x = windowWidth/2, y = windowHeight/2;
