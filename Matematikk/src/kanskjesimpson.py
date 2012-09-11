@@ -11,4 +11,4 @@ def simp(m,a,b):
         summ+= temp
     return (h/3)*summ
 
-print simp(8,0,1.0)
+print simp(4,0,1.0)
