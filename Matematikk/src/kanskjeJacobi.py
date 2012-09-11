@@ -5,12 +5,12 @@ Created on 11. sep. 2012
 '''
 
 A = [[4,-1,0],
-     [-1,4,-1],
+     [4,-16,4],
      [0,-1,4]]
 
 x = [[1,1,1]]
 
-b = [21,-45,33]
+b = [2,2,4]
 
 def Jacobi(itr,S): #S = signifikante siffer
     n = len(A)
@@ -18,7 +18,7 @@ def Jacobi(itr,S): #S = signifikante siffer
         x.append([])
         for j in range (0,n):
             x[m+1].append(b[j])
-            for k in range(0,j):
+            for k in range(0,n):
                 if(k != j):
                     x[m+1][j]-= A[j][k]*x[m][k]
             x[m+1][j] *= (1.0/A[j][j])
