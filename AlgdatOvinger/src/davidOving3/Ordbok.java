@@ -3,21 +3,60 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStreamReader;
+import java.util.Collections;
 import java.util.StringTokenizer;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Ordbok{
+	
 
     public static Node bygg(String[] ordliste){
-        // SKRIV DIN KODE HER
-    	return null;
+        Node rot = new Node();
+        int pos = 0;
+        for (String s:ordliste) {
+        	putBarn(rot, s, pos);
+        	pos+= s.length()+1;
+        }
+    	return rot;
     }
+    
+    
 
-    public static ArrayList<Integer> posisjoner(String ord, int index, Node currentNode){
-        // SKRIV DIN KODE HER
-    	return null;
+    private static void putBarn(Node node, String s, int index) {
+		if (s.isEmpty()) {
+			node.posisjoner.add(index);
+		} else {
+			char c = s.charAt(0);
+        	if(!node.barn.containsKey(c)){
+        		Node nextNode = new Node();
+				node.barn.put(c, nextNode);
+        		putBarn(nextNode,s.substring(1), index);
+        	} else {
+        		putBarn(node.barn.get(c),s.substring(1), index);
+        	}
+		}
+	}
+
+
+	public static ArrayList<Integer> posisjoner(String ord, int index, Node currentNode){
+        for(int i = 0; i < ord.length();i++) {
+        	char c = ord.charAt(i);
+        	if(c == '?') {
+        		ArrayList<Integer> posisjoner = new ArrayList<Integer>();
+        		for (Node node : currentNode.barn.values()) {
+					posisjoner.addAll(posisjoner(ord.substring(i+1), 0, node));
+				}
+        		Collections.sort(posisjoner);
+        		return posisjoner;
+        	}
+        	currentNode = currentNode.barn.get(c);
+        	if(currentNode == null){
+        		return new ArrayList<Integer>();
+        	}
+        }
+        return currentNode.posisjoner;
     }
 
 
