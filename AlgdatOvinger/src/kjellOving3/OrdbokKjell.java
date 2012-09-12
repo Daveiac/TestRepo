@@ -12,7 +12,6 @@ import java.util.HashMap;
 public class OrdbokKjell{
 	static int pos = 0;
 	static ArrayList<Integer> returnList = new ArrayList<Integer>();
-	static HashMap<Character, Node> tempMap = new HashMap<Character, Node>();
 
 	public static Node bygg(String[] ordliste){
 		Node rot = new Node();
@@ -25,7 +24,7 @@ public class OrdbokKjell{
 	private static void createNode(Node node, String ord) {
 		if (! ord.isEmpty()) {
 			char c = ord.charAt(0);
-			tempMap = node.barn;
+			HashMap<Character, Node> tempMap = node.barn;
 			if (! tempMap.containsKey(c))
 				tempMap.put(c, new Node());
 			if (ord.length() == 1)
@@ -40,14 +39,18 @@ public class OrdbokKjell{
 			return;
 		} else if (ord.length() == 0) {
 			returnList.addAll(currentNode.posisjoner);
-		} else if (ord.charAt(0) == '?') {
+			return;
+		} 
+		char c = ord.charAt(0);
+		if (c == '?') {
 			for (Node node : currentNode.barn.values()) {
 				posisjoner(ord.substring(1), node);
 			}
-		} else if (! currentNode.barn.containsKey(ord.charAt(0))) {
+			return;
+		} else if (! currentNode.barn.containsKey(c)) {
 			return;
 		} else {
-			posisjoner(ord.substring(1), currentNode.barn.get(ord.charAt(0)));
+			posisjoner(ord.substring(1), currentNode.barn.get(c));
 		}
 	}
 
@@ -68,7 +71,7 @@ public class OrdbokKjell{
 //            }
 			StringTokenizer st = new StringTokenizer(in.readLine());
 			String[] ord = new String[st.countTokens()];
-			int i=0;
+			int i=0, stop = 0;
 			while(st.hasMoreTokens()) ord[i++]=st.nextToken();
 			Node rotNode = bygg(ord);
 			String sokeord= in.readLine();
@@ -79,9 +82,9 @@ public class OrdbokKjell{
 				posisjoner(sokeord, rotNode);
 				ArrayList<Integer> pos = returnList;
 				int[] posi = new int[pos.size()];
-				for(i=0;i<posi.length;i++)posi[i]=((Integer)pos.get(i)).intValue();
+				for(i=0, stop = posi.length;i<stop;i++)posi[i]=((Integer)pos.get(i)).intValue();
 				Arrays.sort(posi);
-				for(i=0;i<posi.length;i++) System.out.print(" "+posi[i]);
+				for(i=0;i<stop;i++) System.out.print(" "+posi[i]);
 				System.out.println();
 				sokeord=in.readLine();
 			}
