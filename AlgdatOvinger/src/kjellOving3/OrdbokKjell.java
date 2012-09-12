@@ -12,6 +12,7 @@ import java.util.HashMap;
 public class OrdbokKjell{
 	static int pos = 0;
 	static ArrayList<Integer> emptyList = new ArrayList<Integer>();
+	static HashMap<Character, Node> tempMap = new HashMap<Character, Node>();
 
 	public static Node bygg(String[] ordliste){
 		Node rot = new Node();
@@ -24,11 +25,12 @@ public class OrdbokKjell{
 	private static void createNode(Node node, String ord) {
 		if (! ord.isEmpty()) {
 			char c = ord.charAt(0);
-			if (! node.barn.containsKey(c))
-				node.barn.put(c, new Node());
+			tempMap = node.barn;
+			if (! tempMap.containsKey(c))
+				tempMap.put(c, new Node());
 			if (ord.length() == 1)
-				node.barn.get(c).posisjoner.add(pos);
-			createNode(node.barn.get(c), ord.substring(1));
+				tempMap.get(c).posisjoner.add(pos);
+			createNode(tempMap.get(c), ord.substring(1));
 		}
 		pos++;
 	}
