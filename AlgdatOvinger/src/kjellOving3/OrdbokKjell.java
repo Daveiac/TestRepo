@@ -34,23 +34,23 @@ public class OrdbokKjell{
 		pos++;
 	}
 	
-	public static void posisjoner(String ord, Node currentNode){
+	public static void posisjoner(String ord, Node currentNode, int len, int index) {
 		if (currentNode == null) {
 			return;
-		} else if (ord.length() == 0) {
+		} else if (len == index) {
 			returnList.addAll(currentNode.posisjoner);
 			return;
 		} 
-		char c = ord.charAt(0);
+		char c = ord.charAt(index);
 		if (c == '?') {
 			for (Node node : currentNode.barn.values()) {
-				posisjoner(ord.substring(1), node);
+				posisjoner(ord, node, len, index + 1);
 			}
 			return;
 		} else if (! currentNode.barn.containsKey(c)) {
 			return;
 		} else {
-			posisjoner(ord.substring(1), currentNode.barn.get(c));
+			posisjoner(ord, currentNode.barn.get(c), len, index + 1);
 		}
 	}
 
@@ -80,7 +80,7 @@ public class OrdbokKjell{
 				StringBuilder sbuf = new StringBuilder();
 				sokeord=sokeord.trim();
 				sbuf.append(sokeord).append(":");
-				posisjoner(sokeord, rotNode);
+				posisjoner(sokeord, rotNode, sokeord.length(), 0);
 				ArrayList<Integer> pos = returnList;
 				int[] posi = new int[pos.size()];
 				for(i=0, stop = posi.length;i<stop;i++)posi[i]=((Integer)pos.get(i)).intValue();
