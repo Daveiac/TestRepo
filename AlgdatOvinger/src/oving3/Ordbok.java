@@ -16,7 +16,7 @@ public class Ordbok{
     	return null;
     }
 
-    public static ArrayList posisjoner(String ord, int index, Node currentNode){
+    public static ArrayList<Integer> posisjoner(String ord, int index, Node currentNode){
         // SKRIV DIN KODE HER
     	return null;
     }
@@ -46,7 +46,7 @@ public class Ordbok{
             while(sokeord!=null){
                 sokeord=sokeord.trim();
                 System.out.print(sokeord+":");
-                ArrayList pos = posisjoner(sokeord, 0, rotNode);
+                ArrayList<Integer> pos = posisjoner(sokeord, 0, rotNode);
                 int[] posi = new int[pos.size()];
                 for(i=0;i<posi.length;i++)posi[i]=((Integer)pos.get(i)).intValue();
                 Arrays.sort(posi);
@@ -62,11 +62,11 @@ public class Ordbok{
 }
 
 class Node{
-    public ArrayList posisjoner;
-    public HashMap barn;
+    public ArrayList<Integer> posisjoner;
+    public HashMap<> barn;
 
     public Node(){
-        posisjoner=new ArrayList();
-        barn=new HashMap();
+        posisjoner=new ArrayList<Integer>();
+        barn=new HashMap<>();
     }
 }
