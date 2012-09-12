@@ -1,4 +1,4 @@
-package kjellOving3;
+//package kjellOving3;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 public class OrdbokKjell{
 	static int pos = 0;
+	static ArrayList<Integer> emptyList = new ArrayList<Integer>();
 
 	public static Node bygg(String[] ordliste){
 		Node rot = new Node();
@@ -43,9 +44,9 @@ public class OrdbokKjell{
 			}
 			return poss;
 		} else if (currentNode == null) {
-			return new ArrayList<Integer>();
+			return emptyList;
 		} else if (! currentNode.barn.containsKey(ord.charAt(0))) {
-			return new ArrayList<Integer>();
+			return emptyList;
 		} else {
 			return posisjoner(ord.substring(1), index + 1, currentNode.barn.get(ord.charAt(0)));
 		}
@@ -54,16 +55,16 @@ public class OrdbokKjell{
 	public static void main(String[]  args){
 		try{
 			BufferedReader in;
-			if (args.length > 0) {
-				try {
-					in = new BufferedReader(new FileReader(args[0]));
-				} catch (FileNotFoundException e) {
-					System.out.println("Kunne ikke åpne filen " + args[0]);
-					return;
-				}
-			} else {
+//			if (args.length > 0) {
+//				try {
+//					in = new BufferedReader(new FileReader(args[0]));
+//				} catch (FileNotFoundException e) {
+//					System.out.println("Kunne ikke åpne filen " + args[0]);
+//					return;
+//				}
+//			} else {
 				in = new BufferedReader(new InputStreamReader(System.in));
-			}
+//			}
 			StringTokenizer st = new StringTokenizer(in.readLine());
 			String[] ord = new String[st.countTokens()];
 			int i=0;
