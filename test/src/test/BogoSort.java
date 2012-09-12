@@ -24,6 +24,7 @@ public class BogoSort {
 		System.out.println(i);
 	}
 
+	@SuppressWarnings("unchecked")
 	private boolean isSorted(ArrayList<Integer> list) {
 		ArrayList<Integer> sorted = (ArrayList<Integer>) list.clone();
 		Collections.sort(sorted);
