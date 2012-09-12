@@ -1,7 +1,7 @@
-//package kjellOving3;
-//
-//import java.io.FileNotFoundException;
-//import java.io.FileReader;
+package kjellOving3;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
@@ -57,18 +57,18 @@ public class OrdbokKjell{
 	public static void main(String[]  args){
 		try{
 			BufferedReader in;
-//            if (args.length > 0) {
-//                try {
-//                    in = new BufferedReader(new FileReader(args[0]));
-//                }
-//                catch (FileNotFoundException e) {
-//                    System.out.println("Kunne ikke åpne filen " + args[0]);
-//                    return;
-//                }
-//            }
-//            else {
+            if (args.length > 0) {
+                try {
+                    in = new BufferedReader(new FileReader(args[0]));
+                }
+                catch (FileNotFoundException e) {
+                    System.out.println("Kunne ikke åpne filen " + args[0]);
+                    return;
+                }
+            }
+            else {
                 in = new BufferedReader(new InputStreamReader(System.in));
-//            }
+            }
 			StringTokenizer st = new StringTokenizer(in.readLine());
 			String[] ord = new String[st.countTokens()];
 			int i=0, stop = 0;
