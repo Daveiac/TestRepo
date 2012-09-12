@@ -1,8 +1,8 @@
 //package kjellOving3;
-
-import java.io.BufferedReader;
+//
 //import java.io.FileNotFoundException;
 //import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 import java.util.Arrays;
@@ -13,7 +13,7 @@ public class OrdbokKjell{
 	static int pos = 0;
 	static ArrayList<Integer> returnList = new ArrayList<Integer>();
 
-	public static Node bygg(String[] ordliste){
+	private static Node bygg(String[] ordliste){
 		Node rot = new Node();
 		for (String ord : ordliste) {
 			createNode(rot, ord, ord.length(), 0);
@@ -34,7 +34,7 @@ public class OrdbokKjell{
 		pos++;
 	}
 	
-	public static void posisjoner(String ord, Node currentNode, int len, int index) {
+	private static void posisjoner(String ord, Node currentNode, int len, int index) {
 		if (currentNode == null) {
 			return;
 		} else if (len == index) {
@@ -82,8 +82,9 @@ public class OrdbokKjell{
 				sbuf.append(sokeord).append(":");
 				posisjoner(sokeord, rotNode, sokeord.length(), 0);
 				ArrayList<Integer> pos = returnList;
-				int[] posi = new int[pos.size()];
-				for(i=0, stop = posi.length;i<stop;i++)posi[i]=((Integer)pos.get(i)).intValue();
+				stop = pos.size();
+				int[] posi = new int[stop];
+				for(i=0;i<stop;i++)posi[i]=((Integer)pos.get(i)).intValue();
 				Arrays.sort(posi);
 				for (i=0; i<stop; i++) {
 					sbuf.append(" ").append(posi[i]);
