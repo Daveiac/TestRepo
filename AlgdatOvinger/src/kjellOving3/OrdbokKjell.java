@@ -20,7 +20,7 @@ public class OrdbokKjell{
 		}
 		return rot;
 	}
-
+	
 	private static void createNode(Node node, String ord, int len, int index) {
 		if (len > index) {
 			char c = ord.charAt(index);
