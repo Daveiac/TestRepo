@@ -7,7 +7,6 @@ import java.util.StringTokenizer;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class Ordbok{
 
@@ -63,10 +62,10 @@ public class Ordbok{
 
 class Node{
     public ArrayList<Integer> posisjoner;
-    public HashMap<> barn;
+    public HashMap<Character, Node> barn;
 
     public Node(){
         posisjoner=new ArrayList<Integer>();
-        barn=new HashMap<>();
+        barn=new HashMap<Character, Node>();
     }
 }
