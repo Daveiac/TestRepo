@@ -28,6 +28,7 @@ public class BogoSort {
 		System.out.println(i);
 	}
 
+	@SuppressWarnings("unchecked")
 	private boolean isSorted(ArrayList<Integer> list) {
 		for (int i = 0; i < sorted.size(); i++) {
 			if(sorted.get(i) != list.get(i)){
