@@ -12,6 +12,7 @@ import java.util.HashMap;
 public class OrdbokKjell{
 	static int pos = 0;
 	static ArrayList<Integer> emptyList = new ArrayList<Integer>();
+	static HashMap<Character, Node> tempMap = new HashMap<Character, Node>();
 
 	public static Node bygg(String[] ordliste){
 		Node rot = new Node();
@@ -22,25 +23,25 @@ public class OrdbokKjell{
 	}
 
 	private static void createNode(Node node, String ord) {
-		if (ord.length() != 0) {
-			if (! node.barn.containsKey(ord.charAt(0))) {
-				node.barn.put(ord.charAt(0), new Node());
-			}
-			if (ord.length() == 1) {
-				node.barn.get(ord.charAt(0)).posisjoner.add(pos);
-			}
-			createNode(node.barn.get(ord.charAt(0)), ord.substring(1));
+		if (! ord.isEmpty()) {
+			char c = ord.charAt(0);
+			tempMap = node.barn;
+			if (! tempMap.containsKey(c))
+				tempMap.put(c, new Node());
+			if (ord.length() == 1)
+				tempMap.get(c).posisjoner.add(pos);
+			createNode(tempMap.get(c), ord.substring(1));
 		}
 		pos++;
 	}
 	
 	public static ArrayList<Integer> posisjoner(String ord, int index, Node currentNode){
 		if (ord.length() == 0) {
-			return (currentNode == null ? new ArrayList<Integer>() : currentNode.posisjoner);
+			return (currentNode == null ? emptyList : currentNode.posisjoner);
 		} else if (ord.charAt(0) == '?') {
 			ArrayList<Integer> poss = new ArrayList<Integer>();
 			for (Node node : currentNode.barn.values()) {
-				poss.addAll(posisjoner(ord.substring(1), index + 1, node));
+				poss.addAll(posisjoner(ord.substring(1), 0, node));
 			}
 			return poss;
 		} else if (currentNode == null) {
@@ -48,7 +49,7 @@ public class OrdbokKjell{
 		} else if (! currentNode.barn.containsKey(ord.charAt(0))) {
 			return emptyList;
 		} else {
-			return posisjoner(ord.substring(1), index + 1, currentNode.barn.get(ord.charAt(0)));
+			return posisjoner(ord.substring(1), 0, currentNode.barn.get(ord.charAt(0)));
 		}
 	}
 
