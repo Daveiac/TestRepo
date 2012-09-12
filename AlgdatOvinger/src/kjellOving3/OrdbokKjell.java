@@ -84,7 +84,7 @@ public class OrdbokKjell{
 				ArrayList<Integer> pos = returnList;
 				stop = pos.size();
 				int[] posi = new int[stop];
-				for(i=0;i<stop;i++)posi[i]=((Integer)pos.get(i)).intValue();
+				for(i=0;i<stop;i++)posi[i]=pos.get(i).intValue();
 				Arrays.sort(posi);
 				for (i=0; i<stop; i++) {
 					sbuf.append(" ").append(posi[i]);
