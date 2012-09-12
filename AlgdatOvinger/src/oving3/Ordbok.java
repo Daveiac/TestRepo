@@ -63,10 +63,10 @@ public class Ordbok{
 
 class Node{
     public ArrayList<Integer> posisjoner;
-    public HashMap<> barn;
+    public HashMap<Character, Node> barn;
 
     public Node(){
         posisjoner=new ArrayList<Integer>();
-        barn=new HashMap<>();
+        barn=new HashMap<Character, Node>();
     }
 }
