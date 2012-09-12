@@ -1,5 +1,3 @@
-//package kjellOving3;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -11,7 +9,7 @@ import java.util.HashMap;
 
 public class OrdbokKjell{
 	static int pos = 0;
-	static ArrayList<Integer> emptyList = new ArrayList<Integer>();
+	static final ArrayList<Integer> emptyList = new ArrayList<Integer>();
 	static HashMap<Character, Node> tempMap = new HashMap<Character, Node>();
 
 	public static Node bygg(String[] ordliste){
@@ -35,13 +33,13 @@ public class OrdbokKjell{
 		pos++;
 	}
 	
-	public static ArrayList<Integer> posisjoner(String ord, int index, Node currentNode){
+	public static ArrayList<Integer> posisjoner(String ord, Node currentNode){
 		if (ord.length() == 0) {
 			return (currentNode == null ? emptyList : currentNode.posisjoner);
 		} else if (ord.charAt(0) == '?') {
 			ArrayList<Integer> poss = new ArrayList<Integer>();
 			for (Node node : currentNode.barn.values()) {
-				poss.addAll(posisjoner(ord.substring(1), 0, node));
+				poss.addAll(posisjoner(ord.substring(1), node));
 			}
 			return poss;
 		} else if (currentNode == null) {
@@ -49,23 +47,14 @@ public class OrdbokKjell{
 		} else if (! currentNode.barn.containsKey(ord.charAt(0))) {
 			return emptyList;
 		} else {
-			return posisjoner(ord.substring(1), 0, currentNode.barn.get(ord.charAt(0)));
+			return posisjoner(ord.substring(1), currentNode.barn.get(ord.charAt(0)));
 		}
 	}
 
 	public static void main(String[]  args){
 		try{
 			BufferedReader in;
-//			if (args.length > 0) {
-//				try {
-//					in = new BufferedReader(new FileReader(args[0]));
-//				} catch (FileNotFoundException e) {
-//					System.out.println("Kunne ikke åpne filen " + args[0]);
-//					return;
-//				}
-//			} else {
-				in = new BufferedReader(new InputStreamReader(System.in));
-//			}
+			in = new BufferedReader(new InputStreamReader(System.in));
 			StringTokenizer st = new StringTokenizer(in.readLine());
 			String[] ord = new String[st.countTokens()];
 			int i=0;
@@ -75,7 +64,7 @@ public class OrdbokKjell{
 			while(sokeord!=null){
 				sokeord=sokeord.trim();
 				System.out.print(sokeord+":");
-				ArrayList<Integer> pos = posisjoner(sokeord, 0, rotNode);
+				ArrayList<Integer> pos = posisjoner(sokeord, rotNode);
 				int[] posi = new int[pos.size()];
 				for(i=0;i<posi.length;i++)posi[i]=((Integer)pos.get(i)).intValue();
 				Arrays.sort(posi);
@@ -91,11 +80,11 @@ public class OrdbokKjell{
 }
 
 class Node{
-	public ArrayList<Integer> posisjoner;
-	public HashMap<Character, Node> barn;
+    public ArrayList<Integer> posisjoner;
+    public HashMap<Character, Node> barn;
 
-	public Node(){
-		posisjoner=new ArrayList<Integer>();
-		barn=new HashMap<Character, Node>();
-	}
+    public Node(){
+        posisjoner=new ArrayList<Integer>();
+        barn=new HashMap<Character, Node>();
+    }
 }
