@@ -6,7 +6,7 @@ x = [[1,1,1]]
 
 b = [21,-45,33]
 
-def Jacobi(itr,S): #S = signifikante siffer
+def GaussSeidel(itr,S): #S = signifikante siffer
     n = len(A)
     for m in range(0,itr):
         x.append([])
@@ -20,7 +20,7 @@ def Jacobi(itr,S): #S = signifikante siffer
             print "x["+str(m+1)+"]["+str(j)+"]",round(x[m+1][j],S-1)
         print 
 
-Jacobi(5,6)
+GaussSeidel(5,6)
 
         
     
