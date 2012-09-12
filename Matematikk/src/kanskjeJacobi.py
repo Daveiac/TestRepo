@@ -5,12 +5,12 @@ Created on 11. sep. 2012
 '''
 
 A = [[4,-1,0],
-     [4,-16,4],
+     [-1,4,-1],
      [0,-1,4]]
 
 x = [[1,1,1]]
 
-b = [2,2,4]
+b = [21,-45,33]
 
 def Jacobi(itr,S): #S = signifikante siffer
     n = len(A)
