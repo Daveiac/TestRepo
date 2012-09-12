@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Ordbok{
+public class OrdbokKjell{
 
     public static Node bygg(String[] ordliste){
         // SKRIV DIN KODE HER
