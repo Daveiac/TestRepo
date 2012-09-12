@@ -12,7 +12,10 @@ import java.util.HashMap;
 public class Ordbok{
 	
 
-    public static Node bygg(String[] ordliste){
+    private static final ArrayList<Integer> empty = new ArrayList<Integer>();
+
+
+	public static Node bygg(String[] ordliste){
         Node rot = new Node();
         int pos = 0;
         for (String s:ordliste) {
@@ -24,19 +27,20 @@ public class Ordbok{
     
     
 
-    private static void putBarn(Node node, String s, int index) {
-		if (s.isEmpty()) {
-			node.posisjoner.add(index);
+	private static void putBarn(Node node, String s, int index) {
+		char c = s.charAt(0);
+		Node nextNode;
+		if(!node.barn.containsKey(c)){
+			nextNode = new Node();
+			node.barn.put(c, nextNode);
 		} else {
-			char c = s.charAt(0);
-        	if(!node.barn.containsKey(c)){
-        		Node nextNode = new Node();
-				node.barn.put(c, nextNode);
-        		putBarn(nextNode,s.substring(1), index);
-        	} else {
-        		putBarn(node.barn.get(c),s.substring(1), index);
-        	}
+			nextNode = node.barn.get(c);
 		}
+		if (s.length() == 1){
+			nextNode.posisjoner.add(index);
+			return;
+		}
+		putBarn(nextNode,s.substring(1), index);
 	}
 
 
@@ -53,7 +57,7 @@ public class Ordbok{
         	}
         	currentNode = currentNode.barn.get(c);
         	if(currentNode == null){
-        		return new ArrayList<Integer>();
+        		return empty;
         	}
         }
         return currentNode.posisjoner;
@@ -62,19 +66,7 @@ public class Ordbok{
 
     public static void main(String[]  args){
         try{
-            BufferedReader in;
-            if (args.length > 0) {
-                try {
-                    in = new BufferedReader(new FileReader(args[0]));
-                }
-                catch (FileNotFoundException e) {
-                    System.out.println("Kunne ikke åpne filen " + args[0]);
-                    return;
-                }
-            }
-            else {
-                in = new BufferedReader(new InputStreamReader(System.in));
-            }
+            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
             StringTokenizer st = new StringTokenizer(in.readLine());
             String[] ord = new String[st.countTokens()];
             int i=0;
