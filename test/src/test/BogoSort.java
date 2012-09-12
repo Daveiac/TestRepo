@@ -15,7 +15,7 @@ public class BogoSort {
 	private void run() {
 		list = new ArrayList<Integer>();
 		sorted = new ArrayList<Integer>();
-		for (int i = 0; i < 12; i++) {
+		for (int i = 0; i < 15; i++) {
 			sorted.add(i);
 			list.add(i);
 		}
