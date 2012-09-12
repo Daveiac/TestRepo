@@ -1,9 +1,6 @@
 package davidOving3;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.InputStreamReader;
-import java.util.Collections;
 import java.util.StringTokenizer;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -13,21 +10,19 @@ public class Ordbok{
 	
 
     private static final ArrayList<Integer> empty = new ArrayList<Integer>();
+    private static int pos = 0;
 
-
+  
 	public static Node bygg(String[] ordliste){
         Node rot = new Node();
-        int pos = 0;
         for (String s:ordliste) {
-        	putBarn(rot, s, pos);
+        	putBarn(rot, s);
         	pos+= s.length()+1;
         }
     	return rot;
     }
     
-    
-
-	private static void putBarn(Node node, String s, int index) {
+	private static void putBarn(Node node, String s) {
 		char c = s.charAt(0);
 		Node nextNode;
 		if(!node.barn.containsKey(c)){
@@ -37,22 +32,20 @@ public class Ordbok{
 			nextNode = node.barn.get(c);
 		}
 		if (s.length() == 1){
-			nextNode.posisjoner.add(index);
+			nextNode.posisjoner.add(pos);
 			return;
 		}
-		putBarn(nextNode,s.substring(1), index);
+		putBarn(nextNode,s.substring(1));
 	}
 
-
-	public static ArrayList<Integer> posisjoner(String ord, int index, Node currentNode){
+	public static ArrayList<Integer> posisjoner(String ord, Node currentNode){
         for(int i = 0; i < ord.length();i++) {
         	char c = ord.charAt(i);
         	if(c == '?') {
         		ArrayList<Integer> posisjoner = new ArrayList<Integer>();
         		for (Node node : currentNode.barn.values()) {
-					posisjoner.addAll(posisjoner(ord.substring(i+1), 0, node));
+					posisjoner.addAll(posisjoner(ord.substring(i+1), node));
 				}
-        		Collections.sort(posisjoner);
         		return posisjoner;
         	}
         	currentNode = currentNode.barn.get(c);
@@ -74,11 +67,10 @@ public class Ordbok{
             Node rotNode = bygg(ord);
             String sokeord= in.readLine();
             while(sokeord!=null){
-                sokeord=sokeord.trim();
                 System.out.print(sokeord+":");
-                ArrayList<Integer> pos = posisjoner(sokeord, 0, rotNode);
+                ArrayList<Integer> pos = posisjoner(sokeord, rotNode);
                 int[] posi = new int[pos.size()];
-                for(i=0;i<posi.length;i++)posi[i]=((Integer)pos.get(i)).intValue();
+                for(i=0;i<posi.length;i++)posi[i] = pos.get(i);
                 Arrays.sort(posi);
                 for(i=0;i<posi.length;i++) System.out.print(" "+posi[i]);
                 System.out.println();
