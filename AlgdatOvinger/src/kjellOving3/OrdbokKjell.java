@@ -1,4 +1,4 @@
-//package kjellOving3;
+package kjellOving3;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -57,18 +57,18 @@ public class OrdbokKjell{
 	public static void main(String[]  args){
 		try{
 			BufferedReader in;
-//            if (args.length > 0) {
-//                try {
-//                    in = new BufferedReader(new FileReader(args[0]));
-//                }
-//                catch (FileNotFoundException e) {
-//                    System.out.println("Kunne ikke åpne filen " + args[0]);
-//                    return;
-//                }
-//            }
-//            else {
+            if (args.length > 0) {
+                try {
+                    in = new BufferedReader(new FileReader(args[0]));
+                }
+                catch (FileNotFoundException e) {
+                    System.out.println("Kunne ikke åpne filen " + args[0]);
+                    return;
+                }
+            }
+            else {
                 in = new BufferedReader(new InputStreamReader(System.in));
-//            }
+            }
 			StringTokenizer st = new StringTokenizer(in.readLine());
 			String[] ord = new String[st.countTokens()];
 			int i=0, stop = 0;
@@ -77,15 +77,21 @@ public class OrdbokKjell{
 			String sokeord= in.readLine();
 			while(sokeord!=null){
 				returnList.clear();
+				StringBuilder sbuf = new StringBuilder();
 				sokeord=sokeord.trim();
-				System.out.print(sokeord+":");
+//				System.out.print(sokeord+":");
+				sbuf.append(sokeord).append(":");
 				posisjoner(sokeord, rotNode);
 				ArrayList<Integer> pos = returnList;
 				int[] posi = new int[pos.size()];
 				for(i=0, stop = posi.length;i<stop;i++)posi[i]=((Integer)pos.get(i)).intValue();
 				Arrays.sort(posi);
-				for(i=0;i<stop;i++) System.out.print(" "+posi[i]);
-				System.out.println();
+				for (i=0; i<stop; i++) {
+					sbuf.append(" ").append(posi[i]);
+				}
+				System.out.println(sbuf.toString());
+//				for(i=0;i<stop;i++) System.out.print(" "+posi[i]);
+//				System.out.println();
 				sokeord=in.readLine();
 			}
 		} catch(Exception e){
