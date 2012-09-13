@@ -9,12 +9,11 @@ public class OrdbokKjell{
 	static int pos = 0;
 	static ArrayList<Integer> returnList = new ArrayList<Integer>();
 
-	private static Node bygg(String[] ordliste){
-		Node rot = new Node();
+	private static void bygg(String[] ordliste, Node rot){
 		for (String ord : ordliste) {
 			createNode(rot, ord, ord.length(), 0);
 		}
-		return rot;
+		return;
 	}
 
 	private static void createNode(Node node, String ord, int len, int index) {
@@ -69,7 +68,8 @@ public class OrdbokKjell{
 			String[] ord = new String[st.countTokens()];
 			int i=0, stop = 0;
 			while(st.hasMoreTokens()) ord[i++]=st.nextToken();
-			Node rotNode = bygg(ord);
+			Node rotNode = new Node();
+			bygg(ord, rotNode);
 			String sokeord= in.readLine();
 			StringBuilder sbuf = new StringBuilder();
 			ArrayList<Integer> intList = returnList;

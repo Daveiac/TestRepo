@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class Prinsessejakt{
 
 	public static BigDecimal subgraftetthet(boolean[][] nabomatrise, int startnode){
-		String antallKanter = "1";
+		int antallKanter = 1;
 		int antallNoderMed = 1;
 		
 		//TODO: SKRIV DIN KODE HER
