@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class OrdbokKjell{
-	static int pos = 0;
-	static ArrayList<Integer> returnList = new ArrayList<Integer>();
+	private static int pos = 0;
+	private static boolean shuffled; 
+	private static ArrayList<Integer> returnList = new ArrayList<Integer>();
 
 	private static void bygg(String[] ordliste, Node rot){
 		for (String ord : ordliste) {
@@ -49,15 +50,17 @@ public class OrdbokKjell{
 			return;
 		} 
 		char c = ord.charAt(index);
+		HashMap<Character, Node> tempMap = currentNode.barn;
 		if (c == '?') {
-			for (Node node : currentNode.barn.values()) {
+			shuffled = true;
+			for (Node node : tempMap.values()) {
 				posisjoner(ord, node, len, index + 1);
 			}
 			return;
-		} else if (! currentNode.barn.containsKey(c)) {
+		} else if (! tempMap.containsKey(c)) {
 			return;
 		} else {
-			posisjoner(ord, currentNode.barn.get(c), len, index + 1);
+			posisjoner(ord, tempMap.get(c), len, index + 1);
 		}
 	}
 
@@ -74,6 +77,7 @@ public class OrdbokKjell{
 			StringBuilder sbuf = new StringBuilder();
 			ArrayList<Integer> intList = returnList;
 			while(sokeord!=null){
+				shuffled = false;
 				intList.clear();
 				sbuf.delete(0, sbuf.length());
 				sokeord=sokeord.trim();
@@ -83,7 +87,7 @@ public class OrdbokKjell{
 				stop = pos.size();
 				int[] posi = new int[stop];
 				for(i=0;i<stop;i++)posi[i]=pos.get(i).intValue();
-				Arrays.sort(posi);
+				if (shuffled) Arrays.sort(posi);
 				for (i=0; i<stop; i++) {
 					sbuf.append(" ").append(posi[i]);
 				}
