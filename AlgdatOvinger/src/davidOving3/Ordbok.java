@@ -44,7 +44,7 @@ public class Ordbok{
         	if(c == '?') {
         		ArrayList<Integer> posisjoner = new ArrayList<Integer>();
         		for (Node node : currentNode.barn.values()) {
-					posisjoner.addAll(posisjoner(ord, i+1, node));
+					posisjoner.addAll(posisjoner(ord.substring(i+1), i+1, node));
 				}
         		return posisjoner;
         	}
