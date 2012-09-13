@@ -16,14 +16,14 @@ public class Ordbok{
 	public static Node bygg(String[] ordliste){
         Node rot = new Node();
         for (String s:ordliste) {
-        	putBarn(rot, s);
+        	putBarn(rot, s, 0);
         	pos+= s.length()+1;
         }
     	return rot;
     }
     
-	private static void putBarn(Node node, String s) {
-		char c = s.charAt(0);
+	private static void putBarn(Node node, String s, int index) {
+		char c = s.charAt(index);
 		Node nextNode;
 		if(!node.barn.containsKey(c)){
 			nextNode = new Node();
@@ -31,20 +31,20 @@ public class Ordbok{
 		} else {
 			nextNode = node.barn.get(c);
 		}
-		if (s.length() == 1){
+		if (s.length() == index+1){
 			nextNode.posisjoner.add(pos);
 			return;
 		}
-		putBarn(nextNode,s.substring(1));
+		putBarn(nextNode,s, index+1);
 	}
 
-	public static ArrayList<Integer> posisjoner(String ord, Node currentNode){
-        for(int i = 0; i < ord.length();i++) {
+	public static ArrayList<Integer> posisjoner(String ord, int index, Node currentNode){
+        for(int i = index; i < ord.length();i++) {
         	char c = ord.charAt(i);
         	if(c == '?') {
         		ArrayList<Integer> posisjoner = new ArrayList<Integer>();
         		for (Node node : currentNode.barn.values()) {
-					posisjoner.addAll(posisjoner(ord.substring(i+1), node));
+					posisjoner.addAll(posisjoner(ord.substring(i+1), i+1, node));
 				}
         		return posisjoner;
         	}
@@ -67,13 +67,14 @@ public class Ordbok{
             Node rotNode = bygg(ord);
             String sokeord= in.readLine();
             while(sokeord!=null){
-                System.out.print(sokeord+":");
-                ArrayList<Integer> pos = posisjoner(sokeord, rotNode);
+            	StringBuilder sb = new StringBuilder();
+				sb.append(sokeord).append(":");
+                ArrayList<Integer> pos = posisjoner(sokeord, 0, rotNode);
                 int[] posi = new int[pos.size()];
                 for(i=0;i<posi.length;i++)posi[i] = pos.get(i);
                 Arrays.sort(posi);
-                for(i=0;i<posi.length;i++) System.out.print(" "+posi[i]);
-                System.out.println();
+                for(i=0;i<posi.length;i++) sb.append(" ").append(posi[i]);
+                System.out.println(sb.toString());
                 sokeord=in.readLine();
             }
         }
