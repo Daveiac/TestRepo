@@ -27,11 +27,13 @@ public class OrdbokKjell{
 			HashMap<Character, Node> tempMap = node.barn;
 			if (! tempMap.containsKey(c))
 				tempMap.put(c, new Node());
-			if (len == index + 1)
+			if (len == index + 1) {
 				tempMap.get(c).posisjoner.add(pos);
-			createNode(tempMap.get(c), ord, len, index + 1);
+				pos += len + 1;
+			} else {
+				createNode(tempMap.get(c), ord, len, index + 1);
+			}
 		}
-		pos++;
 	}
 	
 	private static void posisjoner(String ord, Node currentNode, int len, int index) {
@@ -62,7 +64,7 @@ public class OrdbokKjell{
                     in = new BufferedReader(new FileReader(args[0]));
                 }
                 catch (FileNotFoundException e) {
-                    System.out.println("Kunne ikke åpne filen " + args[0]);
+                    System.out.println("Kunne ikke ï¿½pne filen " + args[0]);
                     return;
                 }
             }
@@ -99,12 +101,12 @@ public class OrdbokKjell{
 	}
 }
 
-class Node{
-    public ArrayList<Integer> posisjoner;
-    public HashMap<Character, Node> barn;
-
-    public Node(){
-        posisjoner=new ArrayList<Integer>();
-        barn=new HashMap<Character, Node>();
-    }
-}
+//private class Node{
+//    public ArrayList<Integer> posisjoner;
+//    public HashMap<Character, Node> barn;
+//
+//    public Node(){
+//        posisjoner=new ArrayList<Integer>();
+//        barn=new HashMap<Character, Node>();
+//    }
+//}
