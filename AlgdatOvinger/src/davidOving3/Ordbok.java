@@ -38,13 +38,13 @@ public class Ordbok{
 		putBarn(nextNode,s, index+1);
 	}
 
-	public static ArrayList<Integer> posisjoner(String ord, Node currentNode){
-        for(int i = 0; i < ord.length();i++) {
+	public static ArrayList<Integer> posisjoner(String ord, int index, Node currentNode){
+        for(int i = index; i < ord.length();i++) {
         	char c = ord.charAt(i);
         	if(c == '?') {
         		ArrayList<Integer> posisjoner = new ArrayList<Integer>();
         		for (Node node : currentNode.barn.values()) {
-					posisjoner.addAll(posisjoner(ord.substring(i+1), node));
+					posisjoner.addAll(posisjoner(ord, i+1, node));
 				}
         		return posisjoner;
         	}
@@ -69,7 +69,7 @@ public class Ordbok{
             while(sokeord!=null){
             	StringBuilder sb = new StringBuilder();
 				sb.append(sokeord).append(":");
-                ArrayList<Integer> pos = posisjoner(sokeord, rotNode);
+                ArrayList<Integer> pos = posisjoner(sokeord, 0, rotNode);
                 int[] posi = new int[pos.size()];
                 for(i=0;i<posi.length;i++)posi[i] = pos.get(i);
                 Arrays.sort(posi);
