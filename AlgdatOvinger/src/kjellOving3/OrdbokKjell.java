@@ -1,7 +1,3 @@
-package kjellOving3;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
@@ -59,27 +55,17 @@ public class OrdbokKjell{
 	public static void main(String[]  args){
 		try{
 			BufferedReader in;
-            if (args.length > 0) {
-                try {
-                    in = new BufferedReader(new FileReader(args[0]));
-                }
-                catch (FileNotFoundException e) {
-                    System.out.println("Kunne ikke �pne filen " + args[0]);
-                    return;
-                }
-            }
-            else {
                 in = new BufferedReader(new InputStreamReader(System.in));
-            }
 			StringTokenizer st = new StringTokenizer(in.readLine());
 			String[] ord = new String[st.countTokens()];
 			int i=0, stop = 0;
 			while(st.hasMoreTokens()) ord[i++]=st.nextToken();
 			Node rotNode = bygg(ord);
 			String sokeord= in.readLine();
+			StringBuilder sbuf = new StringBuilder();
 			while(sokeord!=null){
 				returnList.clear();
-				StringBuilder sbuf = new StringBuilder();
+				sbuf.delete(0, sbuf.length());
 				sokeord=sokeord.trim();
 				sbuf.append(sokeord).append(":");
 				posisjoner(sokeord, rotNode, sokeord.length(), 0);
@@ -101,12 +87,12 @@ public class OrdbokKjell{
 	}
 }
 
-//private class Node{
-//    public ArrayList<Integer> posisjoner;
-//    public HashMap<Character, Node> barn;
-//
-//    public Node(){
-//        posisjoner=new ArrayList<Integer>();
-//        barn=new HashMap<Character, Node>();
-//    }
-//}
+class Node{
+    public ArrayList<Integer> posisjoner;
+    public HashMap<Character, Node> barn;
+
+    public Node(){
+        posisjoner=new ArrayList<Integer>();
+        barn=new HashMap<Character, Node>();
+    }
+}
