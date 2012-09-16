@@ -9,13 +9,21 @@ import acm.program.GraphicsProgram;
 @SuppressWarnings("serial")
 public class RenderLabyrinth extends GraphicsProgram {
 	private GCompound gc = new GCompound();
-	
 	private int width = 40;
 	private int height = 30;
+	LabyrinthGenerator lab;
+
+	public static void main(String[] args) {
+		new RenderLabyrinth().start();
+	}
 	
-	LabyrinthGenerator lab = new LabyrinthGenerator(width, height);
+	public void setSize(int x, int y) {
+		super.setSize(x, y);
+		super.setSize(x*2-getWidth(), y*2-getHeight());
+	}
 	
 	public void init() {
+		lab = new LabyrinthGenerator(width, height);
 		addKeyListeners();
 	}
 	public void run() {

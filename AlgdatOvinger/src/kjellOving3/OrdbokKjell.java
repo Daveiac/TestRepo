@@ -14,7 +14,6 @@ public class OrdbokKjell{
 		for (String ord : ordliste) {
 			createNode(rot, ord, ord.length(), 0);
 		}
-		return;
 	}
 
 	private static void createNode(Node node, String ord, int len, int index) {
