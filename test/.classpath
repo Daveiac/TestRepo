@@ -11,5 +11,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="libs/jars/slick-util.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="libs/acm.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
