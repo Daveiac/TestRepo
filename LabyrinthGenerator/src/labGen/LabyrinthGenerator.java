@@ -42,10 +42,10 @@ public class LabyrinthGenerator {
 		Collections.shuffle(dirs);
 		
 		for (Node node : dirs) {
-			if (walkways[node.x][node.y]) {
+			if (walkways[node.getX()][node.getY()]) {
 				continue;
-			} else if (checkSurroundingTiles(x, y, node.x, node.y)) {
-				createLab(node.x, node.y);
+			} else if (checkSurroundingTiles(x, y, node.getX(), node.getY())) {
+				createLab(node.getX(), node.getY());
 			}
 			
 		}

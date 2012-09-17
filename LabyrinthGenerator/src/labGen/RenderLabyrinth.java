@@ -55,6 +55,8 @@ public class RenderLabyrinth extends GraphicsProgram {
 		} else if (event.getKeyCode() == KeyEvent.VK_ENTER) {
 			lab.genNewLab();
 			render();
+		} else if (event.getKeyCode() == KeyEvent.VK_P) {
+			FindPath.findPath(1, 1, 25, 25, lab.getWalkways());
 		}
 	}
 }
