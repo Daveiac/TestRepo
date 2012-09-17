@@ -6,7 +6,10 @@ public class FindPath {
 	
 	public static Nodelist findPath(int startX, int startY, int endX, int endY, boolean[][] walkways) {
 		System.out.println("Start pathfind");
-		if(!walkways[endX][endY]) return null;
+		if(!walkways[endX][endY]) {
+			System.out.println("Target is not walkable");
+			return null;
+		}
 		Node startNode = new Node(startX, startY);
 		startNode.setgScore(0);
 		Nodelist openSet = new Nodelist();
