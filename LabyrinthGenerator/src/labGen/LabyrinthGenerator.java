@@ -8,7 +8,7 @@ public class LabyrinthGenerator {
 	private int width;
 	private int height;
 	private static boolean mainRun = false; 
-	private boolean[][] walkways;
+	private Boolean[][] walkways;
 	
 	public static void main(String[] args) {
 		mainRun = true;
@@ -18,7 +18,7 @@ public class LabyrinthGenerator {
 	public LabyrinthGenerator(int width, int height) {
 		this.width = width;
 		this.height = height;
-		walkways = new boolean[width][height];
+		walkways = new Boolean[width][height];
 		fillLevel();
 		createLab(width/2, height/2);
 		if (mainRun) {
@@ -85,7 +85,7 @@ public class LabyrinthGenerator {
 		}
 	}
 
-	public boolean[][] getWalkways() {
+	public Boolean[][] getWalkways() {
 		return walkways;
 	}
 	public int getWidth() {

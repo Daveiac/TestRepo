@@ -38,7 +38,9 @@ public class RenderLabyrinth extends GraphicsProgram {
 		gc.removeAll();
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				if (lab.getWalkways()[i][j]) {
+				if (lab.getWalkways()[i][j] == null) {
+					gc.add(new GImage("player.png", i*16, j*16));
+				} else if (lab.getWalkways()[i][j]) {
 					gc.add(new GImage("blank.png", i*16, j*16));
 				} else {
 					gc.add(new GImage("wall.png", i*16, j*16));
@@ -57,6 +59,14 @@ public class RenderLabyrinth extends GraphicsProgram {
 			render();
 		} else if (event.getKeyCode() == KeyEvent.VK_P) {
 			FindPath.findPath(1, 1, 25, 25, lab.getWalkways());
+			render();
+		} else if (event.getKeyCode() == KeyEvent.VK_R) {
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+					if(lab.getWalkways()[i][j] == null) lab.getWalkways()[i][j] = true;
+				}
+			}
+			render();
 		}
 	}
 }

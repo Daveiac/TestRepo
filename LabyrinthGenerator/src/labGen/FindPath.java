@@ -4,7 +4,7 @@ import java.util.Collections;
 
 public class FindPath {
 	
-	public static Nodelist findPath(int startX, int startY, int endX, int endY, boolean[][] walkways) {
+	public static Nodelist findPath(int startX, int startY, int endX, int endY, Boolean[][] walkways) {
 		System.out.println("Start pathfind");
 		if(!walkways[endX][endY]) {
 			System.out.println("Target is not walkable");
@@ -19,7 +19,7 @@ public class FindPath {
 		while(!openSet.isEmpty()) {
 			Node currentNode = Collections.min(openSet);
 			if (currentNode.getX() == endX && currentNode.getY() == endY) {
-				return getPath(currentNode);
+				return getPath(currentNode, walkways);
 			}
 			openSet.remove(currentNode);
 			closedSet.add(currentNode);
@@ -46,19 +46,21 @@ public class FindPath {
 		return null;
 	}
 	
-	private static Nodelist getPath(Node currentNode) {
+	private static Nodelist getPath(Node currentNode,Boolean[][] walkways) {
 		int length = currentNode.getgScore();
 		Nodelist path = new Nodelist();
 		path.add(currentNode);
+		walkways[currentNode.getX()][currentNode.getY()] = null;		
 		for (int i = 0; i < length-1; i++) {
 			currentNode = currentNode.getParent();
+			walkways[currentNode.getX()][currentNode.getY()] = null;
 			path.add(0, currentNode);
 		}
 		System.out.println(path.toString());
 		return path;
 	}
 	
-	private static boolean withinGrid(int x, int y, boolean[][] walkways) {
+	private static boolean withinGrid(int x, int y, Boolean[][] walkways) {
 		return y >= 0 && x >= 0  && y < walkways.length && x < walkways[y].length;
 	}
 
