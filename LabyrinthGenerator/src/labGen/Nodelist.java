@@ -18,15 +18,4 @@ public class Nodelist extends ArrayList<Node>{
 		}
 		return null;
 	}
-	
-	public void remove(Node node) {
-		super.remove(getNode(node));
-	}
-	
-	public Node pop(int i) {
-		Node node = this.get(i);
-		this.remove(i);
-		return node;
-	}
-
 }
