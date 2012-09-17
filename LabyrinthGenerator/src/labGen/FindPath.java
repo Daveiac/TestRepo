@@ -23,7 +23,6 @@ public class FindPath {
 			}
 			openSet.remove(currentNode);
 			closedSet.add(currentNode);
-			Nodelist adjacentNodes = new Nodelist();
 			int[][] directions = new int[][] {new int[] {-1,0} ,new int[] {0,-1},new int[] {1,0},new int[] {0,1}};
 			for (int[] is : directions) {
 				int x = currentNode.getX()+is[0];
@@ -33,7 +32,6 @@ public class FindPath {
 				node.setgScore(gScore);
 				node.setfScore(gScore+ Math.abs(endX-x) + Math.abs(endY-y));
 				if(withinGrid(x, y, walkways) && walkways[x][y] && !closedSet.contains(node)) {
-					adjacentNodes.add(node);
 					Node existingNode = openSet.getNode(node);
 					if(existingNode == null || node.getgScore() < existingNode.getgScore()) {
 						openSet.remove(existingNode);
@@ -47,21 +45,17 @@ public class FindPath {
 	}
 	
 	private static Nodelist getPath(Node currentNode,Boolean[][] walkways) {
-		int length = currentNode.getgScore();
 		Nodelist path = new Nodelist();
-		path.add(currentNode);
-		walkways[currentNode.getX()][currentNode.getY()] = null;		
-		for (int i = 0; i < length-1; i++) {
-			currentNode = currentNode.getParent();
+		while (currentNode.getParent() != null) {
 			walkways[currentNode.getX()][currentNode.getY()] = null;
 			path.add(0, currentNode);
+			currentNode = currentNode.getParent();
 		}
 		System.out.println(path.toString());
 		return path;
 	}
 	
 	private static boolean withinGrid(int x, int y, Boolean[][] walkways) {
-		return y >= 0 && x >= 0  && y < walkways.length && x < walkways[y].length;
+		return y >= 0 && x >= 0  && x < walkways.length && y < walkways[x].length;
 	}
-
 }

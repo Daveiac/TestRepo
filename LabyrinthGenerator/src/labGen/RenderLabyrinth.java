@@ -1,7 +1,9 @@
 package labGen;
 
 
+import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import acm.graphics.GCompound;
 import acm.graphics.GImage;
@@ -13,6 +15,9 @@ public class RenderLabyrinth extends GraphicsProgram {
 	private int width = 40;
 	private int height = 30;
 	LabyrinthGenerator lab;
+	
+	private Node start;
+	private Node target;
 
 	public static void main(String[] args) {
 		new RenderLabyrinth().start();
@@ -26,6 +31,7 @@ public class RenderLabyrinth extends GraphicsProgram {
 	public void init() {
 		lab = new LabyrinthGenerator(width, height);
 		addKeyListeners();
+		addMouseListeners();
 	}
 	public void run() {
 		this.getGCanvas().requestFocus();
@@ -58,15 +64,42 @@ public class RenderLabyrinth extends GraphicsProgram {
 			lab.genNewLab();
 			render();
 		} else if (event.getKeyCode() == KeyEvent.VK_P) {
-			FindPath.findPath(1, 1, 25, 25, lab.getWalkways());
+			FindPath.findPath(1, 1, 38, 28, lab.getWalkways());
 			render();
 		} else if (event.getKeyCode() == KeyEvent.VK_R) {
-			for (int i = 0; i < width; i++) {
-				for (int j = 0; j < height; j++) {
-					if(lab.getWalkways()[i][j] == null) lab.getWalkways()[i][j] = true;
-				}
-			}
+			clearPath();
 			render();
 		}
+	}
+
+	private void clearPath() {
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				if(lab.getWalkways()[i][j] == null) lab.getWalkways()[i][j] = true;
+			}
+		}
+	}
+	
+	public void mouseReleased(MouseEvent me) {
+		Node mouseNode = getMouseNode();
+		if(me.getButton() == MouseEvent.BUTTON1) {
+			target = mouseNode;
+			System.out.println("Target pos set to: x= "+mouseNode.getX()+", y= "+mouseNode.getY());
+			if(start != null) {
+				clearPath();
+				FindPath.findPath(start.getX(), start.getY(), target.getX(), target.getY(), lab.getWalkways());
+				render();
+			}
+			
+		} else if (me.getButton() == MouseEvent.BUTTON3) {
+			start = mouseNode;
+			System.out.println("Start pos set to: x= "+mouseNode.getX()+", y= "+mouseNode.getY());
+		}
+	}
+	
+	public Node getMouseNode() {
+		Point mouse = getMousePosition();
+		if (mouse == null) return null;
+		return new Node(mouse.x / 16, mouse.y / 16);
 	}
 }
