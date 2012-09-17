@@ -3,6 +3,7 @@ package labGen2;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 import acm.graphics.GCompound;
 import acm.graphics.GImage;
@@ -12,8 +13,8 @@ import acm.program.GraphicsProgram;
 public class RenderLabyrinth2 extends GraphicsProgram {
 	private static final int IMG_SIZE = 16;
 	private GCompound gc = new GCompound();
-	private int width = 20;
-	private int height = 14;
+	private int width = 50;
+	private int height = 25;
 	LabyrinthGenerator2 lab;
 	
 	ArrayList<Node2> path = new ArrayList<Node2>();
@@ -109,6 +110,12 @@ public class RenderLabyrinth2 extends GraphicsProgram {
 			path.clear();
 			Node2[][] network = lab.getNetwork();
 			path = FindPath2.findPath(network, 0, 0, width-1, height-1);
+			render();
+		} else if (event.getKeyCode() == KeyEvent.VK_R) {
+			path.clear();
+			Node2[][] network = lab.getNetwork();
+			Random r = new Random();
+			path = FindPath2.findPath(network, r.nextInt(width), r.nextInt(height), r.nextInt(width), r.nextInt(height));
 			render();
 		} 
 	}
