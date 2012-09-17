@@ -4,14 +4,29 @@ import java.util.ArrayList;
 
 public class Node2 {
 	private int x, y;
+	private boolean visited;
+	private boolean searched;
+	private ArrayList<Node2> children = new ArrayList<Node2>();
+	private Node2 parent;
+	
 	public Node2(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 	
-	private boolean visited;
-	private ArrayList<Node2> children = new ArrayList<Node2>();
+	public Node2 getParent() {
+		return parent;
+	}
+	public void setParent(Node2 parent) {
+		this.parent = parent;
+	}
 	
+	public boolean isSearched() {
+		return searched;
+	}
+	public void search() {
+		searched = true;
+	}
 	public boolean getVisited() {
 		return visited;
 	}
@@ -31,5 +46,9 @@ public class Node2 {
 	}
 	public int getY() {
 		return y;
+	}
+	
+	public String toString() {
+		return "(" + x + "," + y + ")";
 	}
 }

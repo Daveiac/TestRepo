@@ -26,14 +26,14 @@ public class LabyrinthGenerator2 {
 		} else {
 			initWidth = 20; initHeight = 10;
 		}
-		System.out.println(initWidth + ", " + initHeight);
 		new LabyrinthGenerator2(initWidth, initHeight).printLab();
 	}
 	
 	private void printLab() {
 		for (Node2[] row : nodeNetwork) {
 			for (Node2 node : row) {
-				System.out.print(node.getX() + ", " + node.getY() + " - " + node.getVisited());
+				System.out.print("Node: (" + node.getX() + "," + node.getY() + ") Parent: ");
+				System.out.print((node.getParent() != null ? "(" + node.getParent().getX() + "," + node.getParent().getY() + ")" : "null ") + " Children:");
 				for (Node2 child : node.getChildren()) System.out.print(" (" + child.getX() + "," + child.getY() + ")");
 				System.out.println();
 			}
@@ -70,6 +70,7 @@ public class LabyrinthGenerator2 {
 		for (Node2 nextNode : surroundingNodes) {
 			if (!nextNode.getVisited()) {
 				node.addChild(nextNode);
+				nextNode.setParent(node);
 				generateLabyrinth(nextNode);
 			}
 		}
