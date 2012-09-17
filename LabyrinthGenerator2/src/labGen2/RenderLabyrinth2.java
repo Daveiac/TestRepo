@@ -12,7 +12,7 @@ public class RenderLabyrinth2 extends GraphicsProgram {
 	private static final int IMG_SIZE = 16;
 	private GCompound gc = new GCompound();
 	private int width = 20;
-	private int height = 10;
+	private int height = 14;
 	LabyrinthGenerator2 lab;
 
 	public static void main(String[] args) {
