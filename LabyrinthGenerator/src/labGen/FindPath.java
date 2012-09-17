@@ -1,10 +1,11 @@
 package labGen;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 public class FindPath {
 	
-	public static Nodelist findPath(int startX, int startY, int endX, int endY, Boolean[][] walkways) {
+	public static ArrayList<Node> findPath(int startX, int startY, int endX, int endY, Boolean[][] walkways) {
 		System.out.println("Start pathfind");
 		if(!walkways[endX][endY]) {
 			System.out.println("Target is not walkable");
@@ -12,8 +13,8 @@ public class FindPath {
 		}
 		Node startNode = new Node(startX, startY);
 		startNode.setgScore(0);
-		Nodelist openSet = new Nodelist();
-		Nodelist closedSet = new Nodelist();
+		ArrayList<Node> openSet = new ArrayList<Node>();
+		ArrayList<Node> closedSet = new ArrayList<Node>();
 		openSet.add(startNode);
 		
 		while(!openSet.isEmpty()) {
@@ -31,8 +32,8 @@ public class FindPath {
 				int gScore = currentNode.getgScore()+1;
 				node.setgScore(gScore);
 				node.setfScore(gScore+ Math.abs(endX-x) + Math.abs(endY-y));
-				if(withinGrid(x, y, walkways) && walkways[x][y] && !closedSet.contains(node)) {
-					Node existingNode = openSet.getNode(node);
+				if(withinGrid(x, y, walkways) && walkways[x][y] && getNode(node,closedSet) == null) {
+					Node existingNode = getNode(node, openSet);
 					if(existingNode == null || node.getgScore() < existingNode.getgScore()) {
 						openSet.remove(existingNode);
 						openSet.add(node);
@@ -44,18 +45,28 @@ public class FindPath {
 		return null;
 	}
 	
-	private static Nodelist getPath(Node currentNode,Boolean[][] walkways) {
-		Nodelist path = new Nodelist();
+	private static ArrayList<Node> getPath(Node currentNode,Boolean[][] walkways) {
+		ArrayList<Node> path = new ArrayList<Node>();
 		while (currentNode.getParent() != null) {
 			walkways[currentNode.getX()][currentNode.getY()] = null;
 			path.add(0, currentNode);
 			currentNode = currentNode.getParent();
 		}
+		walkways[currentNode.getX()][currentNode.getY()] = null;
 		System.out.println(path.toString());
 		return path;
 	}
 	
 	private static boolean withinGrid(int x, int y, Boolean[][] walkways) {
 		return y >= 0 && x >= 0  && x < walkways.length && y < walkways[x].length;
+	}
+	
+	public static Node getNode(Node node, ArrayList<Node> list) {
+		for (Node m : list) {
+			if(m.equals(node)) {
+				return m;
+			}
+		}
+		return null;
 	}
 }
