@@ -37,7 +37,7 @@ public class RenderLabyrinth2 extends GraphicsProgram {
 	private void render() {
 		remove(gc);
 		gc.removeAll();
-		Node[][] network = lab.getNetwork();
+		Node2[][] network = lab.getNetwork();
 		renderBackground();
 		renderNodes();
 		renderNetwork(network);
@@ -60,11 +60,11 @@ public class RenderLabyrinth2 extends GraphicsProgram {
 		}
 	}
 
-	private void renderNetwork(Node[][] network) {
+	private void renderNetwork(Node2[][] network) {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				Node parent = network[i][j];
-				for (Node child : parent.getChildren()) {
+				Node2 parent = network[i][j];
+				for (Node2 child : parent.getChildren()) {
 					if (parent.getX() > child.getX()) {
 						gc.add(new GImage("blank.png", (child.getX()*2+2)*IMG_SIZE, (child.getY()*2+1)*IMG_SIZE));
 					} else if (parent.getY() > child.getY()) {
@@ -74,7 +74,6 @@ public class RenderLabyrinth2 extends GraphicsProgram {
 					} else if (parent.getY() < child.getY()) {
 						gc.add(new GImage("blank.png", (child.getX()*2+1)*IMG_SIZE, (child.getY()*2)*IMG_SIZE));
 					}
-//					gc.add(new GImage("blank.png", (child.getX()*2+1)*IMG_SIZE, (child.getY()*2+1)*IMG_SIZE));
 				}
 			}
 		}
@@ -85,7 +84,7 @@ public class RenderLabyrinth2 extends GraphicsProgram {
 		if (event.getKeyCode() == KeyEvent.VK_ESCAPE) {
 			System.exit(0);
 		} else if (event.getKeyCode() == KeyEvent.VK_ENTER) {
-			lab.genNewLab();
+			lab.genNewLab(0, 0);
 			render();
 		}
 	}
