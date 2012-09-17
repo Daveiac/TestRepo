@@ -108,11 +108,7 @@ public class RenderLabyrinth2 extends GraphicsProgram {
 		} else if (event.getKeyCode() == KeyEvent.VK_P) {
 			path.clear();
 			Node2[][] network = lab.getNetwork();
-			int startX = 0, startY = 0, endX = width-1, endY = height-1;
-			path = FindPath2.findPath(network[startX][startY], network[endX][endY]);
-//			for (Node2 node : path) {
-//				System.out.println(node);
-//			}
+			path = FindPath2.findPath(network, 0, 0, width-1, height-1);
 			render();
 		} 
 	}

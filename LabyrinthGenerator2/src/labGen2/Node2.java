@@ -51,4 +51,8 @@ public class Node2 {
 	public String toString() {
 		return "(" + x + "," + y + ")";
 	}
+
+	public void setSearched(boolean b) {
+		searched = b;
+	}
 }
