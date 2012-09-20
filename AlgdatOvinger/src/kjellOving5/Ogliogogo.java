@@ -10,8 +10,10 @@ public class Ogliogogo{
 	public static int INF = Integer.MAX_VALUE;
 
 	public static int mst(int[][] nabomatrise){
-		//SKRIV DIN KODE HER
-		return INF;
+		
+		
+		
+		return 0;
 	}
 
 
@@ -31,8 +33,8 @@ public class Ogliogogo{
 				inp=in.readLine();
 			}
 			int[][] nabomatrise = new int[input.size()][input.size()];
-			for(int i=0; i<nabomatrise.length;i++){
-				for(int j=0; j<nabomatrise.length;j++){
+			for(int i=0; i<nabomatrise.length;i++){ //Arrays.fill(mat, val);
+				for(int j=0; j<nabomatrise.length;j++){ //Arrays.fill(mat, val);
 					nabomatrise[i][j]=INF;
 				}	 
 			}
@@ -44,7 +46,7 @@ public class Ogliogogo{
 					nabomatrise[i][Integer.parseInt(oneEdge[0])]=Integer.parseInt(oneEdge[1]);
 				}
 			}
-			System.out.println(""+mst(nabomatrise));
+			System.out.println(mst(nabomatrise));
 		}
 		catch(Exception e){
 			e.printStackTrace();
