@@ -4,9 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.FileReader;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.StringTokenizer;
 import java.util.ArrayList;
 
@@ -19,56 +16,54 @@ public class Ogliogogo2 {
 		int counter = 0;
 		int len = nabomatrise.length;
 		int max = Integer.MIN_VALUE;
-		
+
 		int[] noderSett = new int[len];
 		noderSett[counter] = currentNode;
-		
+
 		while (counter < len) {
 			int nextNode = -1;
-			int nextWeight = INF;
-			
+			int nextWeight = Integer.MAX_VALUE;
+
 			for (int i = 0; i < counter + 1; i++) {
 				for (int j = 0; j < len; j++) {
-					if (nabomatrise[noderSett[i]][j] < nextWeight && ) {
-						
+					if (nabomatrise[noderSett[i]][j] < nextWeight && ! settNode(j, noderSett)) {
+						nextNode = j;
+						nextWeight = nabomatrise[noderSett[i]][j];
 					}
 				}
 			}
-			
+			noderSett[counter] = nextNode;
+			max = Math.max(max, nextWeight);
 			counter++;
 		}
-		
-		
-//		int start = 0;
-//		ArrayList<int[]> edgeList = findEdges(nabomatrise[start], start);
-//		ArrayList<Integer> noderSett = new ArrayList<Integer>();
-//		int max = Integer.MIN_VALUE;
-//		noderSett.add(start);
-//		while (noderSett.size() < nabomatrise.length) {
-//			int[] currentEdge = new int[] {-1, INF};
-//			for (int[] edge : edgeList) {
-//				if (edge[1] < currentEdge[1] && !noderSett.contains(edge[0])) {
-//					currentEdge = edge;
-//				}
-//			}
-//			max = Math.max(max, currentEdge[1]);
-//			int node = currentEdge[0];
-//			noderSett.add(node);
-//			edgeList.addAll(findEdges(nabomatrise[node], node));
-//		}
 		return max;
 	}
 
-	private static ArrayList<int[]> findEdges(int[] naboliste, int start) {
-		ArrayList<int[]> edgeList = new ArrayList<int[]>();
-		for (int i = 0; i < naboliste.length; i++) {
-			int weight = naboliste[i];
-			if (weight != INF) {
-				edgeList.add(new int[]{i, weight});
-			}
+	private static boolean settNode(int j, int[] noderSett) {
+		for (int i : noderSett) {
+			if (i == j) return true;
 		}
-		return edgeList;
+		return false;
 	}
+
+
+	//		int start = 0;
+	//		ArrayList<int[]> edgeList = findEdges(nabomatrise[start], start);
+	//		ArrayList<Integer> noderSett = new ArrayList<Integer>();
+	//		int max = Integer.MIN_VALUE;
+	//		noderSett.add(start);
+	//		while (noderSett.size() < nabomatrise.length) {
+	//			int[] currentEdge = new int[] {-1, INF};
+	//			for (int[] edge : edgeList) {
+	//				if (edge[1] < currentEdge[1] && !noderSett.contains(edge[0])) {
+	//					currentEdge = edge;
+	//				}
+	//			}
+	//			max = Math.max(max, currentEdge[1]);
+	//			int node = currentEdge[0];
+	//			noderSett.add(node);
+	//			edgeList.addAll(findEdges(nabomatrise[node], node));
+	//		}
 
 	public static void main(String[]  args){
 		try{
