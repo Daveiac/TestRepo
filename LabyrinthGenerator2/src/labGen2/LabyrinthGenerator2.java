@@ -46,7 +46,24 @@ public class LabyrinthGenerator2 {
 		initNodeNetwork();
 		root = nodeNetwork[0][0];
 		generateLabyrinth(root);
+//		makeCycles();
 	}
+
+//	private void makeCycles() {
+//		Random r = new Random();
+//		Node2 node = nodeNetwork[r.nextInt(width - 3) + 1][r.nextInt(height - 3) + 1];
+//		ArrayList<Node2> surroundingNodes = new ArrayList<Node2>();
+//		int x = node.getX();
+//		int y = node.getY();
+//		if (x > 0) surroundingNodes.add(nodeNetwork[x-1][y]);
+//		if (y > 0) surroundingNodes.add(nodeNetwork[x][y-1]);
+//		if (x < width - 1) surroundingNodes.add(nodeNetwork[x+1][y]);
+//		if (y < height - 1) surroundingNodes.add(nodeNetwork[x][y+1]);
+//		for (Node2 nextNode : surroundingNodes) {
+//			node.addChild(nextNode);
+//			nextNode.setParent(node);
+//		}
+//	}
 
 	private void initNodeNetwork() {
 		for (int i = 0; i < width; i++) {
@@ -94,6 +111,7 @@ public class LabyrinthGenerator2 {
 		initNodeNetwork();
 		root = nodeNetwork[startX][startY];
 		generateLabyrinth(root);
+//		makeCycles();
 	}
 	
 	

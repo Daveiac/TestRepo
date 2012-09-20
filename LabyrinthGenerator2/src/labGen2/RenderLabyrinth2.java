@@ -13,8 +13,8 @@ import acm.program.GraphicsProgram;
 public class RenderLabyrinth2 extends GraphicsProgram {
 	private static final int IMG_SIZE = 16;
 	private GCompound gc = new GCompound();
-	private int width = 50;
-	private int height = 25;
+	private int width = 6;
+	private int height = 6;
 	LabyrinthGenerator2 lab;
 	
 	ArrayList<Node2> path = new ArrayList<Node2>();
