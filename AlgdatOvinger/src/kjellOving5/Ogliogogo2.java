@@ -20,7 +20,7 @@ public class Ogliogogo2 {
 		int[] noderSett = new int[len];
 		noderSett[counter] = currentNode;
 
-		while (counter < len) {
+		while (counter < len - 1) {
 			int nextNode = -1;
 			int nextWeight = Integer.MAX_VALUE;
 
