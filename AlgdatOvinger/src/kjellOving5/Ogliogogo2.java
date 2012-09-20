@@ -32,9 +32,8 @@ public class Ogliogogo2 {
 					}
 				}
 			}
-			noderSett[counter] = nextNode;
+			noderSett[counter++] = nextNode;
 			max = Math.max(max, nextWeight);
-			counter++;
 		}
 		return max;
 	}
@@ -45,25 +44,6 @@ public class Ogliogogo2 {
 		}
 		return false;
 	}
-
-
-	//		int start = 0;
-	//		ArrayList<int[]> edgeList = findEdges(nabomatrise[start], start);
-	//		ArrayList<Integer> noderSett = new ArrayList<Integer>();
-	//		int max = Integer.MIN_VALUE;
-	//		noderSett.add(start);
-	//		while (noderSett.size() < nabomatrise.length) {
-	//			int[] currentEdge = new int[] {-1, INF};
-	//			for (int[] edge : edgeList) {
-	//				if (edge[1] < currentEdge[1] && !noderSett.contains(edge[0])) {
-	//					currentEdge = edge;
-	//				}
-	//			}
-	//			max = Math.max(max, currentEdge[1]);
-	//			int node = currentEdge[0];
-	//			noderSett.add(node);
-	//			edgeList.addAll(findEdges(nabomatrise[node], node));
-	//		}
 
 	public static void main(String[]  args){
 		try{
@@ -80,19 +60,21 @@ public class Ogliogogo2 {
 				input.add(inp);
 				inp=in.readLine();
 			}
-			int[][] nabomatrise = new int[input.size()][input.size()];
-			for(int i=0; i<nabomatrise.length;i++){ 
+			int len = input.size();
+			int[][] nabomatrise = new int[len][len];
+			for(int i=0; i<len;i++){ 
 				Arrays.fill(nabomatrise[i], INF);
 			}
 			StringTokenizer st;
-			for(int i=0;i<input.size();i++){
+			StringTokenizer stSplitter;
+			for(int i=0;i<len;i++){
 				st = new StringTokenizer((String)input.get(i));
 				while(st.hasMoreTokens()){
-					String[] oneEdge = st.nextToken().split(":");
-					nabomatrise[i][Integer.parseInt(oneEdge[0])]=Integer.parseInt(oneEdge[1]);
+					stSplitter = new StringTokenizer(st.nextToken(), ":");
+					nabomatrise[i][Integer.parseInt(stSplitter.nextToken())]=Integer.parseInt(stSplitter.nextToken());
 				}
 			}
-			System.out.println(mst(nabomatrise));
+			System.out.println(new StringBuilder().append(mst(nabomatrise)).toString());
 		}
 		catch(Exception e){
 			e.printStackTrace();
