@@ -52,7 +52,6 @@ public class LabyrinthGenerator2 {
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				nodeNetwork[i][j] = new Node2(i, j);
-//				System.out.println(nodeNetwork[i][j].getX() + ", " + nodeNetwork[i][j].getY() + " - " + nodeNetwork[i][j].getVisited());
 			}
 		}
 	}
@@ -74,9 +73,6 @@ public class LabyrinthGenerator2 {
 				generateLabyrinth(nextNode);
 			}
 		}
-//		System.out.print(node.getX() + ", " + node.getY() + " - " + node.getVisited());
-//		for (Node child : node.getChildren()) System.out.print(" (" + child.getX() + "," + child.getY() + ")");
-//		System.out.println();
 	}
 
 	public Node2[][] getNetwork() {
