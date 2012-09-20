@@ -23,6 +23,12 @@ public class Prinsessejakt{
 		
 		int antallKanter = Collections.max(antallKanterFraNoder);
 		
+		for (Node node : noder) {
+			System.out.println(node);
+		}
+		System.out.println(antallKanter);
+		System.out.println(antallNoderMed);
+		
 		if (antallNoderMed == 0) {
 			return new BigDecimal(0).divide(new BigDecimal(1), 3, BigDecimal.ROUND_HALF_UP);
 		} else {
@@ -40,6 +46,8 @@ public class Prinsessejakt{
 			if (child.visited != start && !noderMed.contains(child)) {
 				antall++;
 				antall += finnKanterIkkeMed(child, start);
+			} else if (!noderMed.contains(child)) {
+				antall++;
 			}
 		}
 		return antall;
