@@ -10,28 +10,52 @@ import java.util.HashSet;
 import java.util.StringTokenizer;
 import java.util.ArrayList;
 
-public class Ogliogogo {
+public class Ogliogogo2 {
 
 	public static int INF = Integer.MAX_VALUE;
 
 	public static int mst(int[][] nabomatrise){
-		int start = 0;
-		ArrayList<int[]> edgeList = findEdges(nabomatrise[start], start);
-		ArrayList<Integer> noderSett = new ArrayList<Integer>();
+		int currentNode = 0;
+		int counter = 0;
+		int len = nabomatrise.length;
 		int max = Integer.MIN_VALUE;
-		noderSett.add(start);
-		while (noderSett.size() < nabomatrise.length) {
-			int[] currentEdge = new int[] {-1, INF};
-			for (int[] edge : edgeList) {
-				if (edge[1] < currentEdge[1] && !noderSett.contains(edge[0])) {
-					currentEdge = edge;
+		
+		int[] noderSett = new int[len];
+		noderSett[counter] = currentNode;
+		
+		while (counter < len) {
+			int nextNode = -1;
+			int nextWeight = INF;
+			
+			for (int i = 0; i < counter + 1; i++) {
+				for (int j = 0; j < len; j++) {
+					if (nabomatrise[noderSett[i]][j] < nextWeight && ) {
+						
+					}
 				}
 			}
-			max = Math.max(max, currentEdge[1]);
-			int node = currentEdge[0];
-			noderSett.add(node);
-			edgeList.addAll(findEdges(nabomatrise[node], node));
+			
+			counter++;
 		}
+		
+		
+//		int start = 0;
+//		ArrayList<int[]> edgeList = findEdges(nabomatrise[start], start);
+//		ArrayList<Integer> noderSett = new ArrayList<Integer>();
+//		int max = Integer.MIN_VALUE;
+//		noderSett.add(start);
+//		while (noderSett.size() < nabomatrise.length) {
+//			int[] currentEdge = new int[] {-1, INF};
+//			for (int[] edge : edgeList) {
+//				if (edge[1] < currentEdge[1] && !noderSett.contains(edge[0])) {
+//					currentEdge = edge;
+//				}
+//			}
+//			max = Math.max(max, currentEdge[1]);
+//			int node = currentEdge[0];
+//			noderSett.add(node);
+//			edgeList.addAll(findEdges(nabomatrise[node], node));
+//		}
 		return max;
 	}
 
