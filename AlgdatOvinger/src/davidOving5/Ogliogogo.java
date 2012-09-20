@@ -65,10 +65,7 @@ public static void main(String[]  args){
 			st = new StringTokenizer((String)input.get(i));
 			while(st.hasMoreTokens()){
 				st2 = new StringTokenizer(st.nextToken(), ":");
-				int j = 0;
-				String[] oneEdge = new String[st2.countTokens()];
-				while(st2.hasMoreTokens()) oneEdge[j++] = st2.nextToken();
-				nabomatrise[i][Integer.parseInt(oneEdge[0])]=Integer.parseInt(oneEdge[1]);
+				nabomatrise[i][Integer.parseInt(st2.nextToken())]=Integer.parseInt(st2.nextToken());
 			}
 		}
 		System.out.println(mst(nabomatrise));
