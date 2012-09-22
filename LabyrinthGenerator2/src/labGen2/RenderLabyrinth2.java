@@ -13,9 +13,9 @@ import acm.program.GraphicsProgram;
 public class RenderLabyrinth2 extends GraphicsProgram {
 	private static final int IMG_SIZE = 16;
 	private GCompound gc = new GCompound();
-	private int width = 6;
-	private int height = 6;
-	LabyrinthGenerator2 lab;
+	private int width = 50;
+	private int height = 25;
+	LabGen lab;
 	
 	ArrayList<Node2> path = new ArrayList<Node2>();
 
@@ -29,7 +29,8 @@ public class RenderLabyrinth2 extends GraphicsProgram {
 	}
 	
 	public void init() {
-		lab = new LabyrinthGenerator2(width, height);
+		lab = new KruskalLabyrinthGenerator2(width, height);
+//		lab = new LabyrinthGenerator2(width, height);
 		addKeyListeners();
 	}
 	public void run() {

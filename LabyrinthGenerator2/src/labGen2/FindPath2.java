@@ -18,11 +18,8 @@ public class FindPath2 {
 	}
 
 	private static boolean dfs(Node2 currentNode, Node2 end) {
-		currentNode.search();
+		currentNode.setSearched(true);
 		if (currentNode.equals(end)) {
-			path.add(currentNode);
-			return true;
-		} else if (currentNode.getParent() != null && !currentNode.getParent().isSearched() && dfs(currentNode.getParent(), end)) {
 			path.add(currentNode);
 			return true;
 		} else {

@@ -3,7 +3,7 @@ package labGen2;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class LabyrinthGenerator2 {
+public class LabyrinthGenerator2 implements LabGen {
 	private int width;
 	private int height;
 	
@@ -32,8 +32,7 @@ public class LabyrinthGenerator2 {
 	private void printLab() {
 		for (Node2[] row : nodeNetwork) {
 			for (Node2 node : row) {
-				System.out.print("Node: (" + node.getX() + "," + node.getY() + ") Parent: ");
-				System.out.print((node.getParent() != null ? "(" + node.getParent().getX() + "," + node.getParent().getY() + ")" : "null ") + " Children:");
+				System.out.print("Node: (" + node.getX() + "," + node.getY() + ") ");
 				for (Node2 child : node.getChildren()) System.out.print(" (" + child.getX() + "," + child.getY() + ")");
 				System.out.println();
 			}
@@ -86,7 +85,7 @@ public class LabyrinthGenerator2 {
 		for (Node2 nextNode : surroundingNodes) {
 			if (!nextNode.getVisited()) {
 				node.addChild(nextNode);
-				nextNode.setParent(node);
+				nextNode.addChild(node);
 				generateLabyrinth(nextNode);
 			}
 		}
