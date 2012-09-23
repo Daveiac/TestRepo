@@ -12,8 +12,8 @@ import acm.program.GraphicsProgram;
 public class RenderLabyrinth2 extends GraphicsProgram {
 	private static final int IMG_SIZE = (int) new GImage("wall.png").getSize().getHeight();
 	private GCompound gc = new GCompound();
-	private static int width = 16;
-	private static int height = 16;
+	private static int width;
+	private static int height;
 	LabGen lab;
 	
 	ArrayList<Node2> path = new ArrayList<Node2>();

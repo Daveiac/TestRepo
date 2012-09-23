@@ -54,7 +54,6 @@ public class KruskalLabyrinthGenerator2 implements LabGen {
 			}
 		}
 	}
-
 	private void initVertices() {
 		verticesQueue = new PriorityQueue<Edge>();
 		Random r = new Random();
@@ -67,7 +66,6 @@ public class KruskalLabyrinthGenerator2 implements LabGen {
 			}
 		}
 	}
-
 	private void generateLabyrinth() {
 		int nodeCount = width * height;
 		Tree[][] trees = new Tree[width][height];
@@ -98,23 +96,6 @@ public class KruskalLabyrinthGenerator2 implements LabGen {
 				if(stop) break;
 			}
 		}
-		
-//		node.visit();
-//		int x = node.getX();
-//		int y = node.getY();
-//		ArrayList<Node2> surroundingNodes = new ArrayList<Node2>();
-//		if (x > 0) surroundingNodes.add(nodeNetwork[x-1][y]);
-//		if (y > 0) surroundingNodes.add(nodeNetwork[x][y-1]);
-//		if (x < width - 1) surroundingNodes.add(nodeNetwork[x+1][y]);
-//		if (y < height - 1) surroundingNodes.add(nodeNetwork[x][y+1]);
-//		Collections.shuffle(surroundingNodes);
-//		for (Node2 nextNode : surroundingNodes) {
-//			if (!nextNode.getVisited()) {
-//				node.addChild(nextNode);
-//				nextNode.setParent(node);
-//				generateLabyrinth(nextNode);
-//			}
-//		}
 	}
 
 	public Node2[][] getNetwork() {
