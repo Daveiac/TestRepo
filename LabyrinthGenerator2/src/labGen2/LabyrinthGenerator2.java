@@ -32,7 +32,7 @@ public class LabyrinthGenerator2 implements LabGen {
 	private void printLab() {
 		for (Node2[] row : nodeNetwork) {
 			for (Node2 node : row) {
-				System.out.print("Node: (" + node.getX() + "," + node.getY() + ") ");
+				System.out.print("Node: (" + node.getX() + "," + node.getY() + ") Children:");
 				for (Node2 child : node.getChildren()) System.out.print(" (" + child.getX() + "," + child.getY() + ")");
 				System.out.println();
 			}

@@ -1,6 +1,5 @@
 package labGen2;
 
-
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,7 +10,7 @@ import acm.program.GraphicsProgram;
 
 @SuppressWarnings("serial")
 public class RenderLabyrinth2 extends GraphicsProgram {
-	private static final int IMG_SIZE = 16;
+	private static final int IMG_SIZE = (int) new GImage("wall.png").getSize().getHeight();
 	private GCompound gc = new GCompound();
 	private static int width = 16;
 	private static int height = 16;
@@ -125,6 +124,14 @@ public class RenderLabyrinth2 extends GraphicsProgram {
 			path.clear();
 			Node2[][] network = lab.getNetwork();
 			path = FindPath2.findPath(network, 0, 0, width-1, height-1);
+			render();
+		} else if (event.getKeyCode() == KeyEvent.VK_O) {
+			path.clear();
+			Node2[][] network = lab.getNetwork();
+			path = FindPath2.findPath(network, 0, width-1, height-1, 0);
+			render();
+		} else if (event.getKeyCode() == KeyEvent.VK_C) {
+			path.clear();
 			render();
 		} else if (event.getKeyCode() == KeyEvent.VK_R) {
 			path.clear();
