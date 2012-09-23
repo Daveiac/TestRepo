@@ -13,13 +13,27 @@ import acm.program.GraphicsProgram;
 public class RenderLabyrinth2 extends GraphicsProgram {
 	private static final int IMG_SIZE = 16;
 	private GCompound gc = new GCompound();
-	private int width = 50;
-	private int height = 25;
+	private static int width = 16;
+	private static int height = 16;
 	LabGen lab;
 	
 	ArrayList<Node2> path = new ArrayList<Node2>();
 
 	public static void main(String[] args) {
+		if (args.length == 2) {
+			try {
+				width = Integer.parseInt(args[0]);
+			} catch (NumberFormatException e) {
+				width = 28;
+			}
+			try {
+				height = Integer.parseInt(args[1]);
+			} catch (NumberFormatException e) {
+				height = 16;
+			}
+		} else {
+			width = 20; height = 20;
+		}
 		new RenderLabyrinth2().start();
 	}
 	
