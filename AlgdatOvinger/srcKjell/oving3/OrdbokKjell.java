@@ -1,4 +1,4 @@
-package kjellOving3;
+package oving3;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
