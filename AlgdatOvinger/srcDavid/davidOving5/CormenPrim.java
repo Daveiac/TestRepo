@@ -9,31 +9,41 @@ import java.util.ArrayList;
 
 public class CormenPrim {
 
-	private static final int INF = Integer.MAX_VALUE;
 
 	public static int mst(Vertex[] noder) {
 		Vertex startNode = noder[0];
-		Vertex[] noderSett = new Vertex[noder.length];
+		startNode.setKey(0);
 		PriorityQueue<Vertex> Q = new PriorityQueue<Vertex>();
-		int counter = 0;
-		noderSett[counter++] = startNode;
-		int max = Integer.MIN_VALUE;
+		for (int i = 0; i < noder.length; i++) {
+			Q.add(noder[i]);
+		}
+		boolean start = true;
+		Vertex u;
 		while (!Q.isEmpty()) {
-			Vertex u = Q.poll();
+			u = (start) ? startNode : Q.poll();
+			start = false;
 			for (int[] ints: u.getNeighbours()) {
-				//SOME CODE HERE
+				Vertex vertex = noder[ints[0]];
+				int w = ints[1];
+				if(Q.contains(vertex) && w < vertex.getKey()){
+					vertex.setKey(w);
+				}
 				
 			}
+		}
+		int max = Integer.MIN_VALUE;
+		for (int i = 0; i < noder.length; i++) {
+			max = Math.max(max, noder[i].getKey());
 		}
 		return max;
 	}
 
-	public static boolean contains(Vertex[] array, Vertex v, int counter) {
+	public static Vertex getVertex(Vertex[] array, Vertex v, int counter) {
 		for (int j = 0; j < counter; j++) {
 			if (array[j] == v)
-				return true;
+				return array[j];
 		}
-		return false;
+		return null;
 	}
 
 	public static void main(String[] args) {
@@ -59,12 +69,9 @@ public class CormenPrim {
 				st = new StringTokenizer((String) input.get(i));
 				Vertex vertex = new Vertex(i);
 				noder[i] = vertex;
-
 				while (st.hasMoreTokens()) {
 					st2 = new StringTokenizer(st.nextToken(), ":");
-					int toVertex = Integer.parseInt(st2.nextToken());
-					int weight = Integer.parseInt(st2.nextToken());
-					vertex.addNeighbour(toVertex, weight);
+					vertex.addNeighbour(Integer.parseInt(st2.nextToken()), Integer.parseInt(st2.nextToken()));
 				}
 			}
 			System.out.println(mst(noder));
