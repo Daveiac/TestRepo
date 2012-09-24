@@ -1,6 +1,5 @@
 package labGen2;
 
-
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,15 +10,29 @@ import acm.program.GraphicsProgram;
 
 @SuppressWarnings("serial")
 public class RenderLabyrinth2 extends GraphicsProgram {
-	private static final int IMG_SIZE = 16;
+	private static final int IMG_SIZE = (int) new GImage("wall.png").getSize().getHeight();
 	private GCompound gc = new GCompound();
-	private int width = 6;
-	private int height = 6;
-	LabyrinthGenerator2 lab;
+	private static int width;
+	private static int height;
+	LabGen lab;
 	
 	ArrayList<Node2> path = new ArrayList<Node2>();
 
 	public static void main(String[] args) {
+		if (args.length == 2) {
+			try {
+				width = Integer.parseInt(args[0]);
+			} catch (NumberFormatException e) {
+				width = 28;
+			}
+			try {
+				height = Integer.parseInt(args[1]);
+			} catch (NumberFormatException e) {
+				height = 16;
+			}
+		} else {
+			width = 20; height = 20;
+		}
 		new RenderLabyrinth2().start();
 	}
 	
@@ -29,7 +42,8 @@ public class RenderLabyrinth2 extends GraphicsProgram {
 	}
 	
 	public void init() {
-		lab = new LabyrinthGenerator2(width, height);
+		lab = new KruskalLabyrinthGenerator2(width, height);
+//		lab = new LabyrinthGenerator2(width, height);
 		addKeyListeners();
 	}
 	public void run() {
@@ -110,6 +124,14 @@ public class RenderLabyrinth2 extends GraphicsProgram {
 			path.clear();
 			Node2[][] network = lab.getNetwork();
 			path = FindPath2.findPath(network, 0, 0, width-1, height-1);
+			render();
+		} else if (event.getKeyCode() == KeyEvent.VK_O) {
+			path.clear();
+			Node2[][] network = lab.getNetwork();
+			path = FindPath2.findPath(network, 0, width-1, height-1, 0);
+			render();
+		} else if (event.getKeyCode() == KeyEvent.VK_C) {
+			path.clear();
 			render();
 		} else if (event.getKeyCode() == KeyEvent.VK_R) {
 			path.clear();

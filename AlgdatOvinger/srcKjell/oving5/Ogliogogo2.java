@@ -1,4 +1,4 @@
-package kjellOving5;
+package oving5;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -26,7 +26,7 @@ public class Ogliogogo2 {
 
 			for (int i = 0; i < counter + 1; i++) {
 				for (int j = 0; j < len; j++) {
-					if (nabomatrise[noderSett[i]][j] < nextWeight && ! settNode(j, noderSett)) {
+					if (! settNode(j, noderSett) && nabomatrise[noderSett[i]][j] < nextWeight) {
 						nextNode = j;
 						nextWeight = nabomatrise[noderSett[i]][j];
 					}
