@@ -50,7 +50,7 @@ public class KruskalPQ {
 			StringTokenizer st;
 			StringTokenizer stSplitter;
 			for(int i=0;i<nodeCount;i++){
-				st = new StringTokenizer((String)input.get(i));
+				st = new StringTokenizer(input.get(i));
 				while(st.hasMoreTokens()){
 					stSplitter = new StringTokenizer(st.nextToken(), ":");
 					verticesQueue.add(new Edge(i, Integer.parseInt(stSplitter.nextToken()), Integer.parseInt(stSplitter.nextToken())));
