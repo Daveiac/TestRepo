@@ -64,7 +64,7 @@ public class RenderLabyrinth extends GraphicsProgram {
 			lab.genNewLab();
 			render();
 		} else if (event.getKeyCode() == KeyEvent.VK_P) {
-			FindPath.findPath(1, 1, 38, 28, lab.getWalkways());
+			AStar.findPath(1, 1, 38, 28, lab.getWalkways());
 			render();
 		} else if (event.getKeyCode() == KeyEvent.VK_R) {
 			clearPath();
@@ -87,7 +87,7 @@ public class RenderLabyrinth extends GraphicsProgram {
 			System.out.println("Target pos set to: x= "+mouseNode.getX()+", y= "+mouseNode.getY());
 			if(start != null) {
 				clearPath();
-				FindPath.findPath(start.getX(), start.getY(), target.getX(), target.getY(), lab.getWalkways());
+				AStar.findPath(start.getX(), start.getY(), target.getX(), target.getY(), lab.getWalkways());
 				render();
 			}
 			

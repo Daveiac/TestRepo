@@ -3,7 +3,7 @@ package labGen;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class FindPath {
+public class AStar {
 	
 	public static ArrayList<Node> findPath(int startX, int startY, int endX, int endY, Boolean[][] walkways) {
 		System.out.println("Start pathfind");
