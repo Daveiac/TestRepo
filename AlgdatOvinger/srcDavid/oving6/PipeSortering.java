@@ -2,6 +2,7 @@ package oving6;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Random;
 import java.util.StringTokenizer;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,13 +10,57 @@ import java.io.FileReader;
 public class PipeSortering {
 
 	public static void sorter(int[] liste){
-		// SKRIV DIN KODE HER
+		quicksort(liste, 0, liste.length-1);
+	}
+
+	private static void quicksort(int[] liste, int start, int end) {
+		if(end-start <= 0) return;
+		Random rnd = new Random();
+		int r = rnd.nextInt(end-start)+start;
+		swap(liste, r, end);
+		int i = start, j = start;
+		for (int k = start; k < end+1; k++) {
+			if (liste[j] <= liste[end]) {
+				swap(liste, i, j);
+				i++;
+			}
+			j++;
+		}
+		quicksort(liste, 0, i-2);
+		quicksort(liste, i, end);
+	}
+	
+	private static void swap(int[] liste, int i, int j) {
+		int temp = liste[i];
+		liste[i] = liste[j];
+		liste[j] = temp;
 	}
 
 	public static int[] finnMinMax(int[] sortert, int min, int max){
 		int[] minMax = new int[2];
-		// SKRIV DIN KODE HER
+		minMax[0] = minSearch(sortert, min, 0,sortert.length-1);
+		minMax[1] = maxSearch(sortert, max, 0,sortert.length-1);
+		
 		return minMax;
+	}
+
+	private static int minSearch(int[] sortert, int min, int start, int end) {
+		if(end-start <= 1) return sortert[start];
+		int half = (end+start)/2;
+		if(sortert[half] <= min){
+			return minSearch(sortert, min, half, end);
+		} else {
+			return minSearch(sortert, min, start, half);
+		}
+	}
+	private static int maxSearch(int[] sortert, int min, int start, int end) {
+		if(end-start <= 1) return sortert[end];
+		int half = (end+start)/2;
+		if(sortert[half] >= min){
+			return maxSearch(sortert, min, start, half);
+		} else {
+			return maxSearch(sortert, min, half, end);
+		}
 	}
 
 	public static void main(String args[]){
