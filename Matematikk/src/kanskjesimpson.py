@@ -1,14 +1,15 @@
 from math import *
 
 def f(x):
-    return 1/(1+x**2)
+    return e**(-(x**2))
 
-def simp(m,a,b):
-    h = (b-a)/m
+def simp(_2m,a,b):
+    m = _2m/2
+    h = ((b-a)*1.0)/_2m
     summ = 0
-    for i in range(0,m,2):
-        temp = f(a+i*h) + 4*f(a+(i+1)*h) + f(a+(i+2)*h)
+    for i in range(0,m):
+        temp = f(a+2*i*h) + 4*f(a+(2*i+1)*h) + f(a+(2*i+2)*h)
         summ+= temp
     return (h/3)*summ
 
-print simp(4,0,1.0)
+print simp(10,0,1)
